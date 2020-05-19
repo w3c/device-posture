@@ -13,8 +13,9 @@
         shortName: "screen-wake-lock",
         editors: [{
           name: "Diego González",
-          url: "https://samsunginter.net",
+          url: "https://twitter.com/diekus",
           company: "Samsung",
+          companyURL: "https://developer.samsung.com/internet",
           w3cid: "#####"
         },
         {
@@ -66,23 +67,13 @@
         Introduction
       </h2>
       <p>
-        Modern operating systems achieve longer battery life by implementing
-        aggressive power management, meaning that shortly after the lack of
-        user activity, a host device may lower the screen brightness, turn the
-        screen off and even let the CPU go into a deep power state, limiting
-        power usage as much as possible.
+        New types of mobile devices are appearing that have some sort of folding capabilities around the screen. Hence, when the device folds, it physically forms an angle. The main interest in knowing the fold angle is because there are opportunities in responsive design that enable new user experiences.
       </p>
       <p>
-        Though this is great for prolonged battery life, it can sometime hinder
-        some use cases such as scanning a barcode, reading an ebook, following
-        a recipe, presenting to an audience, and so on. See also
-        [[[wake-lock-use-cases]]].
+        From enhancing the usability of a website by avoiding the area of a fold, to enabling innovative use cases for the web, knowing the fold angle can help developers tailor their content to different devices. It can also enable to detect different postures the device might in.
       </p>
       <p>
-        A wake lock will generally prevent something from happening, but UAs
-        (and the underlying OS) may time limit a wake lock given the battery
-        status (wall power connected, discharging, low battery level), or even
-        disallow wake locks in the case a power saving mode is activated.
+        Content can be consumed and browsed even when the device is not flat, in which case the developer might want to provide a different layout for it depending on the state of the angle of the fold. We propose a way to expose information about the fold angle of the device to the developer. Additionally, developers would like to adopt content depending on the various modes and potentially also animate some of these transitions. You can refer to a description of use cases.
       </p>
     </section>
     <section>
