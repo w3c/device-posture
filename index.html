@@ -10,7 +10,7 @@
     <script class='remove'>
       var respecConfig = {
         specStatus: "ED",
-        shortName: "screen-wake-lock",
+        shortName: "screen-fold-angle",
         editors: [{
           name: "Diego González",
           url: "https://twitter.com/diekus",
@@ -24,7 +24,7 @@
           companyURL: "https://intel.com/",
           w3cid: 57705
         }],
-        github: "https://github.com/w3c/fold-angle/",
+        github: "https://github.com/diekus/fold-angle/",
         wg: "Devices and Sensors Working Group",
         wgURI: "https://www.w3.org/das/",
         wgPatentURI: "#",
@@ -41,13 +41,13 @@
       };
     </script>
   </head>
-  <body data-cite="FEATURE-POLICY PERMISSIONS">
+  <body data-cite="FEATURE-POLICY PERMISSIONS CSSOM-VIEW">
     <section id='abstract'>
       <p>
         This document specifies an API that allows web applications to request the
         angular value to which a device with a screen hinge is folded. Under the
         right conditions, and if allowed, the value representing the angle in
-        degrees is returned. 
+        degrees is returned.
       </p>
     </section>
     <section id='sotd'>
@@ -67,95 +67,68 @@
         Introduction
       </h2>
       <p>
-        New types of mobile devices are appearing that have some sort of folding capabilities around the screen. Hence, when the device folds, it physically forms an angle. The main interest in knowing the fold angle is because there are opportunities in responsive design that enable new user experiences.
+        New types of mobile devices are appearing that have some sort of folding
+        capabilities around the screen. Hence, when the device folds, it physically
+        forms an angle. The main interest in knowing the fold angle is because there
+        are opportunities in responsive design that enable new user experiences.
       </p>
       <p>
-        From enhancing the usability of a website by avoiding the area of a fold, to enabling innovative use cases for the web, knowing the fold angle can help developers tailor their content to different devices. It can also enable to detect different postures the device might in.
+        From enhancing the usability of a website by avoiding the area of a fold
+        (or around it), to enabling innovative use cases for the web, knowing the
+        fold angle can help developers tailor their content to different devices.
+        It can also enable to detect different postures the device might in.
       </p>
       <p>
-        Content can be consumed and browsed even when the device is not flat, in which case the developer might want to provide a different layout for it depending on the state of the angle of the fold. We propose a way to expose information about the fold angle of the device to the developer. Additionally, developers would like to adopt content depending on the various modes and potentially also animate some of these transitions. You can refer to a description of use cases.
+        Content can be consumed and browsed even when the device is not flat, in
+        which case the developer might want to provide a different layout for it
+        depending on the state of the angle of the fold. We propose a way to expose
+        information about the fold angle of the device to the developer. Additionally,
+        developers would like to adopt content depending on the various modes and
+        potentially also animate some of these transitions.
+
+        You can refer to a description of use cases.
       </p>
     </section>
-    <section>
+    <section data-link-for="ScreenFoldPosture">
       <h2>
-        Wake Locks
+        Posture modes
       </h2>
       <p>
-        This specification defines the following <dfn data-export="">wake lock
-        type</dfn>:
+        This specification defines the following
+        <dfn data-export="">posture</dfn> values:
       </p>
       <ol>
-        <li>A <dfn data-export="">screen wake lock</dfn> prevents the screen
-        from turning off. Only visible documents can acquire the screen wake
-        lock.
+        <li>
+          <a>Laptop</a> posture indicates that the device is being used as
+          a traditional laptop, meaning one screen is placed on a more or
+          less horizontal surface with a screen angle between 180 to 0 degrees.
+        </li>
+        <li>
+          <a>Flat</a> posture indicates that one screen is being placed on
+          a more or less horizontal surface with a screen angle around 180 degrees.
+        </li>
+        <li>
+          <a>Tent</a> posture indicates that the edges of both screens are placed
+          on a horizontal surface but with an angle > 180 degrees.
+        </li>
+        <li>
+          <a>Tablet</a> posture...
+        </li>
+        <li>
+          <a>Book</a> posture...
         </li>
       </ol>
       <p>
-        In the API, the [=wake lock types=] are represented by the
-        {{WakeLockType}} enum values.
+        In the API, the [=posture=] values are represented by the
+        {{ScreenFoldPosture}} enum values.
       </p>
-      <p class="note">
-        Other specifications might define different wake lock types.
-      </p>
-    </section>
-    <section>
-      <h3>
-        Concepts and state record
-      </h3>
-      <p>
-        The term <dfn>platform wake lock</dfn> refers to platform interfaces
-        with which the user agent interacts to query state and acquire and
-        release a wake lock.
-      </p>
-      <p>
-        A <a>platform wake lock</a> can be defined by the underlying platform
-        (e.g. in a native wake lock framework) or by the user agent, if it has
-        direct hardware control.
-      </p>
-      <p>
-        Each <a>platform wake lock</a> (one per <a>wake lock type</a>) has an
-        associated <dfn>state record</dfn> per [=environment settings object /
-        responsible document=] with the following <a data-cite=
-        "ECMASCRIPT#sec-object-internal-methods-and-internal-slots">internal
-        slots</a>:
-      </p>
-      <table class="simple">
-        <thead>
-          <tr>
-            <th>
-              Internal slot
-            </th>
-            <th>
-              Initial value
-            </th>
-            <th>
-              Description (<em>non-normative</em>)
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <dfn>[[\ActiveLocks]]</dfn>
-            </td>
-            <td>
-              The empty <a>list</a>.
-            </td>
-            <td>
-              A <a>list</a> of {{WakeLockSentinel}} objects, representing
-              active wake locks associated with the [=environment settings
-              object / responsible document=].
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </section>
     <section data-dfn-for="Screen">
       <h2>
         Extensions to the `Screen` interface
       </h2>
       <p>
-        The [=CSSOM View Module=] specification defines the {{Screen}} interface,
+        The [[cssom-view]] specification defines the {{Screen}} interface,
         which this specification extends:
       </p>
       <pre class="idl">
@@ -173,11 +146,11 @@
         [SecureContext, Exposed=(Window)]
         interface ScreenFold : EventTarget {
           readonly attribute unsigned short angle;
-          readonly attribute ScreenFoldMode mode;
+          readonly attribute ScreenFoldPosture posture;
           attribute EventHandler onchange;
         };
 
-        enum ScreenFoldMode {
+        enum ScreenFoldPosture {
           "laptop",
           "tent",
           "tablet",
@@ -186,399 +159,109 @@
         };
       </pre>
       <section>
-        <h3>
-          The <dfn>request()</dfn> method
-        </h3>
-        <p data-tests="wakelock-type.https.any.html">
-          The {{WakeLock/request()}} method, when invoked, MUST run the
-          following steps. The method takes one argument, the {{WakeLockType}}
-          |type:WakeLockType|:
+        <h3>The <dfn>angle</dfn> attribute: Get current screen fold angle</h3>
+        <p>
+          When getting the type attribute, the user agent MUST return the
+          [=environment settings object/responsible document=]'s current screen fold angle.
+        </p>
+      </section>
+      <section>
+        <h3>The <dfn>posture</dfn> attribute: Get current screen fold posture</h3>
+        <p>
+          When getting the type attribute, the user agent MUST return the
+          [=environment settings object/responsible document=]'s current screen fold {{posture}}.
+        </p>
+      </section>
+      <section>
+        <h3>The <dfn>onchange</dfn> attribute: Handle angle/posture changes</h3>
+        <p data-link-for="ScreenFold">
+          The {{onchange}} attribute is an <a data-cite="html">event handler</a> whose corresponding
+          <a data-cite="html">event handler event type</a> is "<code>change</code>".
+        </p>
+      </section>
+    </section>
+    <section>
+      <h3>
+        Algorithms
+      </h3>
+      <section data-link-for='ScreenFold'>
+        <h2>
+          Screen fold angle change
+        </h2>
+        <p>
+          Whenever the screen(s) fold angle changes, the <a>user agent</a> MUST run
+          the following steps as part of the next <a>animation frame task</a>:
         </p>
         <ol class="algorithm">
-          <li>Let |document:Document| be the [=environment settings object /
-          responsible document=] of the <a>current settings object</a>.
-            <ol>
-              <li data-tests=
-              "wakelock-disabled-by-feature-policy.https.sub.html">If
-              |document| is not <a>allowed to use</a> the <a>policy-controlled
-              feature</a> named "`screen-wake-lock`", return [=a promise
-              rejected with=] a {{"NotAllowedError"}} {{DOMException}}.
-              </li>
-              <li data-tests=
-              "wakelock-screen-type-on-worker.https.worker.html">If the
-              <a>user agent</a> <a>denies the wake lock</a> of this
-              |type| for |document|, return [=a promise rejected with=]
-              {{"NotAllowedError"}} {{DOMException}}.
-              </li>
-            </ol>
+          <li>Let |browsing contexts| be the <a>list of the descendant browsing contexts</a> of the <a>top-level browsing context</a>'s
+          <a>document</a>.
           </li>
-          <li>If the |document|'s [=Document/browsing context=] is `null`,
-          return [=a promise rejected with=] {{"NotAllowedError"}}
-          {{DOMException}}.
-          </li>
-          <li data-tests=
-          "wakelock-active-document.https.window.html">If |document|
-          is not [=Document/fully active=], return [=a
-          promise rejected with=] with a {{"NotAllowedError"}}
-          {{DOMException}}.
-          </li>
-          <li data-tests=
-          "wakelock-document-hidden-manual.https.html">If |document|
-          is <a>hidden</a>, return [=a promise rejected with=]
-          {{"NotAllowedError"}} {{DOMException}}.
-          </li>
-          <li>Let |promise:Promise| be [=a new promise=].
-          </li>
-          <li>Return |promise| and run the following steps <a>in parallel</a>:
+          <li>[=list/for each=] |context:browsing context| in |browsing contexts|, run
+          the following sub-steps:
             <ol>
               <li>
-                <a>Abort when</a> |document| is <a>hidden</a>.
+                Let |document| be the |context|'s <a>active document</a>.
               </li>
-              <li>Let |state:PermissionState| be the result of awaiting
-              <a>obtain permission</a> steps with "`screen-wake-lock`":
-                <ol>
-                  <li data-tests=
-                  "wakelock-request-denied.https.html">If
-                  |state| is {{PermissionState/"denied"}}, then reject
-                  |promise| with a {{"NotAllowedError"}} {{DOMException}}, and
-                  abort these steps.
-                  </li>
-                </ol>
+              <li>
+                If |document| is not visible per [[PAGE-VISIBILITY]],
+                abort these steps.
               </li>
-              <li>Let |lock:WakeLockSentinel| be a new {{WakeLockSentinel}}
-              object with its {{WakeLockSentinel/type}} attribute set to
-              |type|.
+              <li>
+                <a>Update the screen fold information</a> of |document|.
               </li>
-              <li>Let |success:boolean| be the result of awaiting <a>acquire a
-              wake lock</a> with |lock| and {{WakeLockType/"screen"}}:
-                <ol>
-                  <li>If |success| is `false` then reject |promise| with a
-                  {{"NotAllowedError"}} {{DOMException}}, and abort these
-                  steps.
-                  </li>
-                </ol>
-              </li>
-              <li>Resolve |promise| with |lock|.
+              <li>
+                <a>Fire an event</a> named `change` at |document|'s
+                {{Screen.fold}} object.
               </li>
             </ol>
+          </li>
+        </ol>
+        <p>
+          Whenever a <a>document</a> becomes visible per [[PAGE-VISIBILITY]],
+          in other words after the <a>now visible algorithm</a> is run, the
+          <a>user agent</a> MUST run the following substeps as part of the next
+          <a>animation frame task</a>:
+        </p>
+        <ol class="algorithm">
+          <li>
+            Let |document| be the <a>document</a> in question.
           </li>
           <li>
-            <a>If aborted</a>, reject |promise| with a {{"NotAllowedError"}}
-            {{DOMException}}.
-          </li>
-        </ol>
-      </section>
-    </section>
-    <section data-dfn-for="WakeLockSentinel">
-      <h2>
-        The <dfn>WakeLockSentinel</dfn> interface
-      </h2>
-      <pre class="idl">
-        [SecureContext, Exposed=(Window)]
-        interface WakeLockSentinel : EventTarget {
-          readonly attribute WakeLockType type;
-          Promise&lt;void&gt; release();
-          attribute EventHandler onrelease;
-        };
-      </pre>
-      <p>
-        A {{WakeLockSentinel}} object provides a handle to a <a>platform wake
-        lock</a>, and it holds on to it until it is either manually released or
-        until the underlying <a>platform wake lock</a> is released. Its
-        existence keeps a <a>platform wake lock</a> for a given <a>wake lock
-        type</a> active, and releasing all {{WakeLockSentinel}} instances of a
-        given <a>wake lock type</a> will cause the underlying <a>platform wake
-        lock</a> to be released.
-      </p>
-      <aside class="note">
-        See <a>auto-releasing wake locks</a>, <a>handling document loss of full
-        activity</a> and <a>handling document loss of visibility</a> for
-        circumstances under which a given wake lock may be released by the
-        <a>user agent</a>.
-      </aside>
-      <p>
-        The <dfn>type</dfn> attribute corresponds to the {{WakeLockSentinel}}'s
-        <a>wake lock type</a>.
-      </p>
-      <section>
-        <h3 data-tests="wakelock-onrelease.https.html">
-          The <dfn>onrelease</dfn> attribute
-        </h3>
-        <p>
-          The {{WakeLockSentinel/onrelease}} attribute is an <a>event
-          handler</a> whose corresponding <a>event handler event type</a> is
-          <code>release</code>.
-        </p>
-        <p>
-          It is used to notify scripts that a given {{WakeLockSentinel}}
-          object's handle has been released, either due to the
-          {{WakeLockSentinel/release()}} method being called or because the
-          wake lock was released by the <a>user agent</a>.
-        </p>
-        <aside class="note">
-          A {{WakeLockSentinel}} object's handle being released does not
-          necessarily mean the <a>platform wake lock</a> for a given <a>wake
-          lock type</a> was released. That depends on the <a>platform wake
-          lock</a>'s {{[[ActiveLocks]]}} internal slot. See <a>release a wake
-          lock</a>.
-        </aside>
-        <aside class="note">
-          [[[#onrelease-example]]] contains an example of how to use the
-          {{WakeLockSentinel/onrelease}} event handler.
-        </aside>
-      </section>
-    </section>
-    <section data-dfn-for="WakeLockType">
-      <h2>
-        The <dfn>WakeLockType</dfn> enum
-      </h2>
-      <p>
-        For the purpose of wake lock type description, this specification
-        defines the following enumeration to represent [=wake lock types=]:
-      </p>
-      <pre class="idl">
-        enum WakeLockType { "screen" };
-      </pre>
-      <dl>
-        <dt>
-          <dfn>screen</dfn>
-        </dt>
-        <dd>
-          <a>Screen wake lock</a> type.
-        </dd>
-      </dl>
-    </section>
-    <section>
-      <h2>
-        Managing Wake Locks
-      </h2>
-      <p>
-        This section applies to each <a>wake lock type</a> equally and
-        independently, unless a particular <a>wake lock type</a> is explicitly
-        mentioned.
-      </p>
-      <p>
-        The <a>user agent</a> <dfn data-lt=
-        "acquire wake lock|acquire the wake lock|acquired">acquires the wake
-        lock</dfn> by requesting the underlying operating system to apply the
-        lock. The lock is considered acquired only when the request to the
-        operating system succeeds.
-      </p>
-      <p>
-        Conversely, the <a>user agent</a> <dfn data-lt=
-        "release wake lock">releases the wake lock</dfn> by requesting the
-        underlying operating system to no longer apply the wake lock. The lock
-        is considered released only when the request to the operating system
-        succeeds.
-      </p>
-      <p>
-        The wake lock is <dfn data-lt=
-        "applicable wake lock|applicability">applicable</dfn> if the state of
-        the operating system permits application of the lock (e.g. there is
-        sufficient battery charge).
-      </p>
-      <p>
-        The <a>screen wake lock</a> MUST NOT be <a>applicable</a> after the
-        screen is manually switched off by the user until it is switched on
-        again.
-      </p>
-      <aside class="note">
-        Whether the wake lock is applicable is a transient condition, e.g. when
-        the battery charge is low but then the battery is recharged. So like
-        the visibility requirement, this is part of automatic wake lock
-        management and not part of the decision process whether to allow or
-        deny the wake lock.
-      </aside>
-      <section>
-        <h3>
-          <dfn>Auto-releasing wake locks</dfn>
-        </h3>
-        <p>
-          A user agent may <a>release a wake lock</a> at any time it:
-        </p>
-        <ul>
-          <li>Detects abnormal operation: such as infinite loops and tasks
-          exceeding imposed time limits (if any).
-          </li>
-          <li>Battery is considered low and discharging.
-          </li>
-          <li>The user turns on some kind of device power conservation mode.
-          </li>
-        </ul>
-      </section>
-      <section>
-        <h3>
-          <dfn>Handling document loss of full activity</dfn>
-        </h3>
-        <p data-tests="wakelock-active-document.https.window.html"></p>
-          When the user agent determines that a [=environment settings object /
-          responsible document=] of the <a>current settings object</a> is no
-          longer [=Document/fully active=], it must run these steps:
-        </p>
-        <ol class="algorithm">
-          <li>Let |document:Document| be the [=environment settings object /
-          responsible document=] of the <a>current settings object</a>.
-          </li>
-          <li>Let |screenRecord| be the <a>platform wake lock</a>'s <a>state
-          record</a> associated with |document| and <a>wake lock type</a>
-          [=screen wake lock=].
-          </li>
-          <li>[=list/For each=] |lock:WakeLockSentinel| in
-          |screenRecord|.{{[[ActiveLocks]]}}:
-            <ol>
-              <li>Run <a>release a wake lock</a> with |lock| and
-              {{WakeLockType/"screen"}}.
-              </li>
-            </ol>
-          </li>
-        </ol>
-        <aside class="note">
-          Only documents presented to the user, thus with an associated
-          [=Document/browsing context=] can be <a>active documents</a>, so the
-          above steps are only relevant for these.
-        </aside>
-      </section>
-      <section>
-        <h3>
-          <dfn>Handling document loss of visibility</dfn>
-        </h3>
-        <p data-tests="wakelock-document-hidden-manual.https.html">
-          When the user agent determines that the <a>visibility state</a> of
-          the [=environment settings object / responsible document=] of the
-          <a>current settings object</a> changes, it must run these steps:
-        </p>
-        <ol class="algorithm">
-          <li>Let |document:Document| be the [=environment settings object /
-          responsible document=] of the <a>current settings object</a>.
-          </li>
-          <li>If |document|'s <a>visibility state</a> is `"visible"`, abort
-          these steps.
-          </li>
-          <li>Let |screenRecord| be the <a>platform wake lock</a>'s <a>state
-          record</a> associated with <a>wake lock type</a> [=screen wake
-          lock=].
-          </li>
-          <li>[=list/For each=] |lock:WakeLockSentinel| in
-          |screenRecord|.{{[[ActiveLocks]]}}:
-            <ol>
-              <li>Run <a>release a wake lock</a> with |lock| and
-              {{WakeLockType/"screen"}}.
-              </li>
-            </ol>
-          </li>
-        </ol>
-        <aside class="note">
-          The <a>visibility state</a> is only exposed on the {{Window}} object.
-        </aside>
-      </section>
-      <section>
-        <h3>
-          Acquire wake lock algorithm
-        </h3>
-        <p>
-          To <dfn>acquire a wake lock</dfn> for a given |lock:WakeLockSentinel|
-          and |type:WakeLockType|, run these steps <a>in parallel</a>:
-        </p>
-        <ol class="algorithm">
-          <li>If the wake lock for type |type| is not <a>applicable</a>, return
-          `false`.
-          </li>
-          <li>Set |active:boolean| to `true` if the <a>platform wake lock</a>
-          has an active wake lock for |type|.
-          </li>
-          <li>Otherwise, ask the underlying operating system to <a>acquire the
-          wake lock</a> of type |type| and set |active| to `true` if the
-          operation succeeded, or else `false`.
-          </li>
-          <li>If |active| is `true`:
-            <ol>
-              <li>Let |document:Document| be the [=environment settings object
-              / responsible document=] of the <a>current settings object</a>.
-              </li>
-              <li>Let |record| be the <a>platform wake lock</a>'s <a>state
-              record</a> associated with |document| and |type|.
-              </li>
-              <li>Add |lock| to |record|.{{[[ActiveLocks]]}}.
-              </li>
-            </ol>
-          </li>
-          <li>Return |active|.
-          </li>
-        </ol>
-      </section>
-      <section>
-        <h3>
-          Release wake lock algorithm
-        </h3>
-        <p>
-          To <dfn>release a wake lock</dfn> for a given |lock:WakeLockSentinel|
-          and |type:WakeLockType|, run these steps <a>in parallel</a>:
-        </p>
-        <ol class="algorithm">
-          <li>Let |document:Document| be the [=environment settings object /
-          responsible document=] of the <a>current settings object</a>.
-          </li>
-          <li>Let |record| be the <a>platform wake lock</a>'s <a>state
-          record</a> associated with |document| and |type|.
-          </li>
-          <li>If |record|.{{[[ActiveLocks]]}} does not contain |lock|, abort
-          these steps.
-          </li>
-          <li>Remove |lock| from |record|.{{[[ActiveLocks]]}}.
-          </li>
-          <li>If the internal slot {{[[ActiveLocks]]}} of all the <a>platform
-          wake lock</a>'s <a>state record</a>s are all empty, then run the
-          following steps <a>in parallel</a>:
-            <ol>
-              <li>Ask the underlying operating system to release the wake lock
-              of type |type| and let |success:boolean| be `true` if the
-              operation succeeded, or else `false`.
-              </li>
-              <li>If |success| is `true` and |type| is `"screen"` run the
-              following:
-                <ol>
-                  <li>Reset the platform-specific inactivity timer after which
-                  the screen is actually turned off.
-                  </li>
-                </ol>
-                <aside class="note">
-                  Resetting the inactivity timer prevents the screen from going
-                  blank immediately after the wake lock is released.
-                </aside>
-              </li>
-            </ol>
+            Let |posture| and |angle| be respectively the |document|'s <a>
+            current posture</a> and <a>current fold angle</a>.
           </li>
           <li>
-            <a>Queue a task</a> to <a>fire an event</a> named "`release`" at
-            |lock|.
+            <a>Update the screen fold information</a> of the |document|.
+          </li>
+          <li>If |posture| is different from the |document|'s <a>current
+          posture</a> or |angle| from the |document|'s <a>current
+          fold angle</a>, run the following sub-steps:
+            <ol>
+              <li>
+                <a>Fire an event</a> named `change` at the |document|'s
+                {{Screen.fold}} object.
+              </li>
+            </ol>
           </li>
         </ol>
+        <div class="note">
+          <p>
+            Developers need to be aware that a {{Screen.fold}} object
+            from a <a>document</a> that is not visible, as per
+            [[PAGE-VISIBILITY]], will not receive an orientation change event.
+            This is to prevent unnecessary changes to layout, etc. in the
+            non-visible web application.
+          </p>
+        </div>
+        <div class='issue'>
+          This section could be improved if the [[PAGE-VISIBILITY]]
+          specification had a hook for when the document becomes visible and
+          hidden. <a href=
+          'https://github.com/w3c/page-visibility/pull/54'>PR 54</a>.
+        </div>
       </section>
     </section>
-    <section>
-      <h2>
-        Security and privacy considerations
-      </h2>
-      <p>
-        Application of a wake lock causes various device components such as
-        display or CPU to operate at higher power levels than they otherwise
-        would. This can lead to undesirable and potentially dangerous effects
-        such as excessive heating and faster than normal battery charge
-        depletion. The latter is particularly relevant to mobile devices which
-        may not have a stationary power source readily available. Complete
-        battery depletion at an unexpected time can lead to inability of the
-        user to make or receive calls and use network services, including the
-        emergency call service. Implementations should consider preventing wake
-        lock application if they determine that the remaining battery capacity
-        is low.
-      </p>
-      <p>
-        When the <a>user agent</a> does not <a>acquire wake lock</a> even
-        though a browsing context has requested it, this can be observed by the
-        browsing context and can possibly disclose sensitive information about
-        the state of the device such as that battery level is low.
-      </p>
-    </section>
+
     <section id="examples" class="informative">
       <h2>
         Examples
@@ -623,11 +306,25 @@
         Dependencies
       </h2>
       <p>
-        Document's <code><dfn data-cite=
-        "PAGE-VISIBILITY#dom-document-hidden">hidden</dfn></code> attribute,
-        and <dfn data-cite="PAGE-VISIBILITY#dfn-visibility-states">visibility
-        state</dfn> are defined in [[PAGE-VISIBILITY]].
+        The following concepts and interfaces are defined in [[HTML]]:
+        <dfn data-cite=
+        "HTML/browsers.html#list-of-the-descendant-browsing-contexts">list of
+        the descendant browsing contexts</dfn>.
       </p>
+      <p>
+        The following is defined in [[PAGE-VISIBILITY]]: <dfn data-cite=
+        "PAGE-VISIBILITY#dfn-now-visible-algorithm">now visible
+        algorithm</dfn>.
+      </p>
+      <p>
+        The following is used but not defined in [[FULLSCREEN]]: <dfn><a href=
+        'https://github.com/whatwg/fullscreen/issues/16'>animation frame
+        task</a></dfn>.
+      </p>
+      <div class='issue'>
+        This should now be updated since the <a>animation frame task</a> issue
+        is recently resolved and the timing is now defined.
+      </div>
     </section>
     <section id="conformance">
       <p>
@@ -641,7 +338,8 @@
         Acknowledgments
       </h2>
       <p>
-        We would like to offer our sincere thanks to ... for their contributions
+        We would like to offer our sincere thanks to Daniel Appelquist, Alexis Menard,
+        Jo Balletti, Ably Realtime and Michael Blix for their contributions
         to this work.
       </p>
     </section>
