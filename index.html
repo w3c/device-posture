@@ -260,7 +260,6 @@
           </li>
         </ol>
       </section>
-
       <section data-link-for='ScreenFold'>
         <h2>
           Screen fold angle change
@@ -338,7 +337,26 @@
         </div>
       </section>
     </section>
-
+    <section>
+      <h2>
+        Security and Privacy considerations
+      </h2>
+      <p>
+        Exposing the screen fold angle can have some privacy implications when it comes to privacy and security. Specifically, the angle value could be used for browser fingerprinting, in a way that can help fully or partially identify individual users. It is up to the implementer to minimize this, and some proposed solutions are listed below.
+      </p>
+      <h3>
+        Lowering the resolution of the angle value
+      </h3>
+      <p>
+        Lowering the resolution of the angle MAY lead to reducing the uniqueness that the value can have. Nonetheless, if several sites are being displayed on the same device, it can be easy to identify that it is the same user, even if the value is rounded. As a solution, applying some fuzziness to the value itself MAY work.
+      </p>
+      <h3>
+        Applying fuzziness to the angle value
+      </h3>
+      <p>
+        Lowering the resolution of the returned value may not be enough, so fuzzing out the value can algo help, in order to report different values. This fuzzy offset can help differentiate returned values, minimizing the risk of fingerprinting.
+      </p>
+    </section>
     <section id="examples" class="informative">
       <h2>
         Examples
@@ -420,7 +438,7 @@
       </h2>
       <p>
         We would like to offer our sincere thanks to Daniel Appelquist, Alexis Menard,
-        Jo Balletti, Ably Realtime and Michael Blix for their contributions
+        Jo Balletti, and Michael Blix for their contributions
         to this work.
       </p>
     </section>
