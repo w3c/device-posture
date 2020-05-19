@@ -41,7 +41,7 @@
       };
     </script>
   </head>
-  <body data-cite="FEATURE-POLICY PERMISSIONS CSSOM-VIEW">
+  <body data-cite="FEATURE-POLICY PERMISSIONS CSSOM-VIEW SCREEN-ORIENTATION">
     <section id='abstract'>
       <p>
         This document specifies an API that allows web applications to request the
@@ -74,41 +74,6 @@
       </p>
       <p>
         Content can be consumed and browsed even when the device is not flat, in which case the developer might want to provide a different layout for it depending on the state of the angle of the fold. Additionally, developers can adapt content depending on various “postures” and potentially also animate some of these transitions. You can refer to a description of use cases.
-      </p>
-    </section>
-    <section data-link-for="ScreenFoldPosture">
-      <h2>
-        Posture modes
-      </h2>
-      <p>
-        This specification defines the following
-        <dfn data-export="">posture</dfn> values:
-      </p>
-      <img src="images/modes.svg">
-      <ol>
-        <li>
-          <a>Laptop</a> posture indicates that the device is being used as
-          a traditional laptop, meaning one screen is placed on a more or
-          less horizontal surface with a screen angle between 180 to 0 degrees.
-        </li>
-        <li>
-          <a>Flat</a> posture indicates that one screen is being placed on
-          a more or less horizontal surface with a screen angle around 180 degrees.
-        </li>
-        <li>
-          <a>Tent</a> posture indicates that the edges of both screens are placed
-          on a horizontal surface but with an angle > 180 degrees.
-        </li>
-        <li>
-          <a>Tablet</a> posture...
-        </li>
-        <li>
-          <a>Book</a> posture...
-        </li>
-      </ol>
-      <p>
-        In the API, the [=posture=] values are represented by the
-        {{ScreenFoldPosture}} enum values.
       </p>
     </section>
     <section data-dfn-for="Screen">
@@ -168,10 +133,134 @@
         </p>
       </section>
     </section>
+
+    <section data-link-for="ScreenFoldPosture">
+      <h2>
+        Posture modes
+      </h2>
+      <p>
+        This specification defines the following
+        <dfn data-export="">posture</dfn> values:
+      </p>
+      <img src="images/modes.svg">
+      <ol>
+        <li>
+          <a>Laptop</a> posture indicates that the device is being used as
+          a traditional laptop, meaning one screen is placed on a more or
+          less horizontal surface with a screen angle between 180 to 0 degrees.
+        </li>
+        <li>
+          <a>Flat</a> posture indicates that one screen is being placed on
+          a more or less horizontal surface with a screen angle around 180 degrees.
+        </li>
+        <li>
+          <a>Tent</a> posture indicates that the edges of both screens are placed
+          on a horizontal surface but with an angle > 180 degrees.
+        </li>
+        <li>
+          <a>Tablet</a> posture...
+        </li>
+        <li>
+          <a>Book</a> posture...
+        </li>
+      </ol>
+      <p>
+        In the API, the [=posture=] values are represented by the
+        {{ScreenFoldPosture}} enum values.
+      </p>
+    </section>
+    <section>
+      <h2>
+        Reading the posture
+      </h2>
+      <p>
+        All <a>documents</a> have a <dfn>current screen fold angle</dfn> and a
+        <dfn>current posture</dfn>. Both of them SHOULD be
+        initialized when the <a>document</a> is created, otherwise they MUST
+        be initialized the first time they are accessed and before their
+        value is read. The <a>user agent</a> MUST <a>update the screen fold
+        information</a> of the <a>document</a> to initialize them.
+      </p>
+      <p>
+        For a given <a>document</a>, the <a>current posture</a>
+        is derived from the <a>current screen fold angle</a> and the <a>
+        current screen orientation</a>.
+      </p>
+      <p>
+        The <a>posture values table</a> shows how the {{posture}}
+        values are derived:
+      </p>
+      <table class="simple">
+        <caption>
+          The <dfn>posture values table</dfn>
+        </caption>
+        <thead>
+          <tr>
+            <th>
+              <a>Current posture</a>
+            </th>
+            <th>
+              <a>Current screen orientation</a>
+            </th>
+            <th>
+              <a>Current screen fold angle</a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-link-for="ScreenFoldPosture">
+              <a>Laptop</a>
+            </td>
+            <td>
+              "portrait-primary" | "portrait-secondary"
+            </td>
+            <td>
+              `[0`-`180[`
+            </td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td data-link-for="ScreenFoldPosture">
+              <a>Flat</a>
+            </td>
+            <td>
+              <i>any orientation</i>
+            </td>
+            <td>
+              `180` (approximately)
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
     <section>
       <h3>
         Algorithms
       </h3>
+      <section data-link-for="ScreenFold">
+        <h2>
+          Updating the screen fold information
+        </h2>
+        <p>
+          The steps to <dfn>update the screen fold information</dfn> of a
+          <a>document</a> are as follows:
+        </p>
+        <ol class="algorithm">
+          <li>
+            Set the <a>document</a>'s <a>current screen fold angle</a> to the 
+            angle between the screen fold in degrees (or two screens in
+            case of a dual screen device).
+          </li>
+          <li>
+            Update the <a>document</a>'s <a>current posture</a> given
+            the <a>current screen fold angle</a> and <a>current screen orientation</a>,
+            according to <a>posture values table</a>.
+          </li>
+        </ol>
+      </section>
+
       <section data-link-for='ScreenFold'>
         <h2>
           Screen fold angle change
@@ -216,13 +305,13 @@
           </li>
           <li>
             Let |posture| and |angle| be respectively the |document|'s <a>
-            current posture</a> and <a>current fold angle</a>.
+            current posture</a> and <a>current screen fold angle</a>.
           </li>
           <li>
             <a>Update the screen fold information</a> of the |document|.
           </li>
           <li>If |posture| is different from the |document|'s <a>current
-          posture</a> or |angle| from the |document|'s <a>current
+          posture</a> or |angle| from the |document|'s <a>current screen
           fold angle</a>, run the following sub-steps:
             <ol>
               <li>
@@ -293,6 +382,10 @@
       <h2>
         Dependencies
       </h2>
+      <p>
+        The following concepts and interfaces are defined in [[SCREEN-ORIENTATION]]:
+        <dfn>current screen orientation</dfn> as represented by the {{OrientationType}} enum.
+      </p>
       <p>
         The following concepts and interfaces are defined in [[HTML]]:
         <dfn data-cite=
