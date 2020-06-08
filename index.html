@@ -40,6 +40,22 @@
         xref: "web-platform"
       };
     </script>
+    <style>
+      :root {
+        --drawing-size: 10rem;
+      }
+
+      .posture-drawing {
+        width: var(--drawing-size);
+        object-fit: contain;
+      }
+
+      .postures {
+        display: grid;
+        grid-template: 1fr / auto auto;
+        grid-gap: 2rem;
+      }
+    </style>
   </head>
   <body data-cite="FEATURE-POLICY PERMISSIONS CSSOM-VIEW SCREEN-ORIENTATION">
     <section id='abstract'>
@@ -142,24 +158,28 @@
         This specification defines the following
         <dfn data-export="">posture</dfn> values:
       </p>
-      <img src="images/modes.svg">
-      <ol>
+      <ol class="postures">
+        <img src="images/laptop-mode-graphic.svg" class="posture-drawing" alt="drawing of laptop mode">
         <li>
           <a>Laptop</a> posture indicates that the device is being used as
           a traditional laptop, meaning one screen is placed on a more or
           less horizontal surface with a screen angle between 180 to 0 degrees.
         </li>
+        <img src="images/flat-mode-graphic.svg" class="posture-drawing" alt="drawing of flat mode">
         <li>
           <a>Flat</a> posture indicates that one screen is being placed on
           a more or less horizontal surface with a screen angle around 180 degrees.
         </li>
+        <img src="images/tent-mode-graphic.svg" class="posture-drawing" alt="drawing of tent mode">
         <li>
           <a>Tent</a> posture indicates that the edges of both screens are placed
           on a horizontal surface but with an angle > 180 degrees.
-        </li>
+        </li>        
+        <img src="images/tablet-mode-graphic.svg" class="posture-drawing" alt="drawing of tablet mode">
         <li>
           <a>Tablet</a> posture...
         </li>
+        <img src="images/book-mode-graphic.svg" class="posture-drawing" alt="drawing of book mode">
         <li>
           <a>Book</a> posture...
         </li>
