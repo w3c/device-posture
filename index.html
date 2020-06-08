@@ -269,8 +269,9 @@
           the following steps as part of the next <a>animation frame task</a>:
         </p>
         <ol class="algorithm">
-          <li>Let |browsing contexts| be the <a>list of the descendant browsing contexts</a> of the <a>top-level browsing context</a>'s
-          <a>document</a>.
+          <li>
+            Let |browsing contexts| be the <a>list of the descendant browsing contexts</a>
+            of the <a>top-level browsing context</a>'s <a>document</a>.
           </li>
           <li>[=list/for each=] |context:browsing context| in |browsing contexts|, run
           the following sub-steps:
@@ -342,58 +343,40 @@
         Security and Privacy considerations
       </h2>
       <p>
-        Exposing the screen fold angle can have some privacy implications when it comes to privacy and security. Specifically, the angle value could be used for browser fingerprinting, in a way that can help fully or partially identify individual users. It is up to the implementer to minimize this, and some proposed solutions are listed below.
+        Exposing the screen fold angle can have some privacy implications when it
+        comes to privacy and security. Specifically, the angle value could be used
+        for browser fingerprinting, in a way that can help fully or partially
+        identify individual users. It is up to the implementer to minimize this,
+        and some proposed solutions are listed below.
       </p>
       <h3>
         Lowering the resolution of the angle value
       </h3>
       <p>
-        Lowering the resolution of the angle MAY lead to reducing the uniqueness that the value can have. Nonetheless, if several sites are being displayed on the same device, it can be easy to identify that it is the same user, even if the value is rounded. As a solution, applying some fuzziness to the value itself MAY work.
+        Lowering the resolution of the angle MAY lead to reducing the uniqueness
+        that the value can have. Nonetheless, if several sites are being displayed
+        on the same device, it can be easy to identify that it is the same user,
+        even if the value is rounded. As a solution, applying some fuzziness to
+        the value itself MAY work.
       </p>
       <h3>
         Applying fuzziness to the angle value
       </h3>
       <p>
-        Lowering the resolution of the returned value may not be enough, so fuzzing out the value can algo help, in order to report different values. This fuzzy offset can help differentiate returned values, minimizing the risk of fingerprinting.
+        Lowering the resolution of the returned value may not be enough, so fuzzing
+        out the value can algo help, in order to report different values. This fuzzy
+        offset can help differentiate returned values, minimizing the risk of fingerprinting.
       </p>
     </section>
     <section id="examples" class="informative">
       <h2>
         Examples
       </h2>
-      <pre class="example js" title="Acquires and releases a screen wake lock">
-        function tryKeepScreenAlive(minutes) {
-          navigator.wakeLock.request("screen").then(lock =&gt; {
-            setTimeout(() =&gt; lock.release(), minutes * 60 * 1000);
-          });
-        }
-
-        tryKeepScreenAlive(10);
-      </pre>
-      <p>
-        This example allows the user to request a screen wake lock by clicking
-        on a checkbox, but updates the checkbox checked state in case the wake
-        lock state changes:
-      </p>
-      <pre class="example js" id="onrelease-example">
-        const checkbox = document.createElement("input");
-        checkbox.setAttribute("type", "checkbox");
-        document.body.appendChild(checkbox);
-
-        const sentinel = await navigator.wakeLock.request("screen");
-        checkbox.checked = true;
-        sentinel.onrelease = () =&gt; checkbox.checked = false;
-      </pre>
-      <p>
-        In this example, two different wake lock requests are created and
-        released independently:
-      </p>
-      <pre class="example js">
-        let lock1 = await navigator.wakeLock.request("screen");
-        let lock2 = await navigator.wakeLock.request("screen");
-
-        lock1.release();
-        lock2.release();
+      <pre class="example js" title="React to poster change">
+          screen.fold.addEventListener("change", () => {
+            const { angle, posture } = screen.fold;
+            console.log(`The current screen angle is ${angle}, which means it is in ${posture} posture!`);
+          })
       </pre>
     </section>
     <section>
