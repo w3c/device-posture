@@ -121,10 +121,10 @@
 
         enum ScreenFoldPosture {
           "laptop",
+          "flat",
           "tent",
           "tablet",
-          "book",
-          "flat"
+          "book"          
         };
       </pre>
       <section>
@@ -208,7 +208,7 @@
           Value:
         </dt>
         <dd>
-          <a>laptop</a> | <a>tent</a> | <a>tablet</a> | <a>book</a> | <a>flat</a>
+          <a>laptop</a> | <a>flat</a> | <a>tent</a> | <a>tablet</a> | <a>book</a>  
         </dd>
         <dt>
           Applies to:
@@ -228,6 +228,44 @@
         application via a CSS media query [[MEDIAQ]].
       </p>
     </section>
+    <section data-link-for="ScreenFoldAngle">
+      <h3>
+        The <code>'screen-fold-angle'</code> media feature
+      </h3>
+      <p>
+        The <code><dfn>screen-fold-angle</dfn></code> media feature represents,
+        via a CSS media query [[MEDIAQ]], the <a class="production css" href="https://drafts.csswg.org/css-values-3/#angle-value">&lt;angle&gt;</a> of the device.
+        This media feature applies to the top-level browsing
+        context and any child browsing contexts. Child browsing contexts
+        reflect the <a>posture</a> of the <a>top-level browsing
+        context</a>.
+      </p>
+      <dl>
+        <dt>
+          Value:
+        </dt>
+        <dd>
+          <a class="production css" href="https://drafts.csswg.org/css-values-3/#angle-value">&lt;angle&gt;</a>  
+        </dd>
+        <dt>
+          Applies to:
+        </dt>
+        <dd>
+          visual media types
+        </dd>
+        <dt>
+          Accepts min/max prefixes:
+        </dt>
+        <dd>
+          Yes
+        </dd>
+      </dl>
+      <p>
+        A user agent MUST reflect the applied <a class="production css" href="https://drafts.csswg.org/css-values-3/#angle-value">&lt;angle&gt;</a> of the web
+        application via a CSS media query [[MEDIAQ]].
+      </p>
+    </section>
+    
     <section>
       <h2>
         Reading the posture
