@@ -189,6 +189,43 @@
         {{ScreenFoldPosture}} enum values.
       </p>
     </section>
+    <section data-link-for="ScreenFoldPosture">
+      <h3>
+        The <code>'screen-fold-posture'</code> media feature
+      </h3>
+      <p>
+        The <code><dfn>screen-fold-posture</dfn></code> media feature represents,
+        via a CSS media query [[MEDIAQ]], the <a>posture</a> of the device.
+        This media feature applies to the top-level browsing
+        context and any child browsing contexts. Child browsing contexts
+        reflect the <a>posture</a> of the <a>top-level browsing
+        context</a>.
+      </p>
+      <dl>
+        <dt>
+          Value:
+        </dt>
+        <dd>
+          <a>laptop</a> | <a>tent</a> | <a>tablet</a> | <a>book</a> | <a>flat</a>
+        </dd>
+        <dt>
+          Applies to:
+        </dt>
+        <dd>
+          visual media types
+        </dd>
+        <dt>
+          Accepts min/max prefixes:
+        </dt>
+        <dd>
+          No
+        </dd>
+      </dl>
+      <p>
+        A user agent MUST reflect the applied <a>posture</a> of the web
+        application via a CSS media query [[MEDIAQ]].
+      </p>
+    </section>
     <section>
       <h2>
         Reading the posture
