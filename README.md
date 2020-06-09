@@ -1,5 +1,7 @@
 # Fold Angle API
 
+!['drawing of different postures'](https://github.com/diekus/fold-angle/blob/master/images/postures.png?raw=true)
+
 ## Authors
 * [Diego González-Zúñiga](https://twitter.com/diekus) ([Samsung](https://samsunginter.net))
 * [Kenneth Rohde Christiansen](https://twitter.com/kennethrohde) ([Intel](https://intel.com))
