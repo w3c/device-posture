@@ -50,6 +50,13 @@
         object-fit: contain;
       }
 
+      .centered {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+      }
+
       .postures {
         display: grid;
         grid-template: 1fr / auto auto;
@@ -237,7 +244,7 @@
         via a CSS media query [[MEDIAQ]], the <a class="production css" href="https://drafts.csswg.org/css-values-3/#angle-value">&lt;angle&gt;</a> of the device.
         This media feature applies to the top-level browsing
         context and any child browsing contexts. Child browsing contexts
-        reflect the <a>angle</a> of the <a>top-level browsing
+        reflect the <a class="production css" href="https://drafts.csswg.org/css-values-3/#angle-value">&lt;angle&gt;</a> of the <a>top-level browsing
         context</a>.
       </p>
       <dl>
@@ -283,13 +290,25 @@
         is derived from the <a>current screen fold angle</a> and the <a>
         current screen orientation</a>.
       </p>
+      <p><i>These tables are non-normative.</i></p>
+      <h3><dfn>Posture values table</dfn></h3>
       <p>
         The <a>posture values table</a> shows how the {{posture}}
-        values are derived:
+        values are derived depending on the orientation of the fold:
       </p>
-      <table class="simple">
+      <h4>Horizontal Fold</h4>
+      <span class="postures">
+        <img src="images/horizontal-fold.svg" class="posture-drawing" alt="drawing of a device with a vertical fold">
+        <p>
+          Devices with a horizontal fold are the ones for which in their 
+        main form factor, the folding occurs from left to right, across 
+        the screen(s).
+        </p>
+        
+      </span>
+        <table class="simple">
         <caption>
-          The <dfn>posture values table</dfn>
+          The posture values table for devices with a horizontal fold
         </caption>
         <thead>
           <tr>
@@ -310,10 +329,10 @@
               <a>Laptop</a>
             </td>
             <td>
-              "portrait-primary" | "portrait-secondary"
+              <i>"portrait-primary" | "portrait-secondary"</i>
             </td>
             <td>
-              `[80`-`130[`
+              `[110`-`180[`
             </td>
           </tr>
           <tr>
@@ -335,7 +354,7 @@
               <i>any orientation</i>
             </td>
             <td>
-              `]200-300[`
+              `]180-360[`
             </td>
           </tr>
           <tr>
@@ -354,10 +373,93 @@
               <a>Book</a>
             </td>
             <td>
+              <i>"landscape-primary" | "landscape-secondary"</i>
+            </td>
+            <td>
+              `]0 - 110[`
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Vertical Fold</h4>
+      <span class="postures">
+        <img src="images/vertical-fold.svg" class="posture-drawing" alt="drawing of a device with a horizontal fold">
+        <p>
+          Devices with a vertical fold are the ones for which in their main form 
+          factor, the folding occurs from top to bottom, across the screen(s).
+        </p>
+      </span>
+      <table class="simple">
+        <caption>
+          The posture values table for devices with a vertical fold
+        </caption>
+        <thead>
+          <tr>
+            <th>
+              <a>Current posture</a>
+            </th>
+            <th>
+              <a>Current screen orientation</a>
+            </th>
+            <th>
+              <a>Current screen fold angle</a>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-link-for="ScreenFoldPosture">
+              <a>Laptop</a>
+            </td>
+            <td>
+              <i>"landscape-primary" | "landscape-secondary"</i>
+            </td>
+            <td>
+              `[110`-`180[`
+            </td>
+          </tr>
+          <tr>
+            <td data-link-for="ScreenFoldPosture">
+              <a>Flat</a>
+            </td>
+            <td>
               <i>any orientation</i>
             </td>
             <td>
-              `]50-110[`
+              `180` (approximately)
+            </td>
+          </tr>
+          <tr>
+            <td data-link-for="ScreenFoldPosture">
+              <a>Tent</a>
+            </td>
+            <td>
+              <i>any orientation</i>
+            </td>
+            <td>
+              `]180-360[`
+            </td>
+          </tr>
+          <tr>
+            <td data-link-for="ScreenFoldPosture">
+              <a>Tablet</a>
+            </td>
+            <td>
+              <i>any orientation</i>
+            </td>
+            <td>
+              `360` (approximately)
+            </td>
+          </tr>
+          <tr>
+            <td data-link-for="ScreenFoldPosture">
+              <a>Book</a>
+            </td>
+            <td>
+              <i>"portrait-primary" | "portrait-secondary"</i>
+            </td>
+            <td>
+              `]0 - 110[`
             </td>
           </tr>
         </tbody>
