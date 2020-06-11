@@ -8,7 +8,7 @@
     <script src='https://www.w3.org/Tools/respec/respec-w3c' async class=
     'remove'></script>
     <script class='remove'>
-      var respecConfig = {
+      const respecConfig = {
         specStatus: "ED",
         shortName: "screen-fold-angle",
         editors: [{
@@ -20,6 +20,7 @@
         },
         {
           name: "Kenneth Rohde Christiansen",
+          url: "https://github.com/kenchris",
           company: "Intel Corporation",
           companyURL: "https://intel.com/",
           w3cid: 57705
@@ -27,16 +28,16 @@
         github: "https://github.com/diekus/fold-angle/",
         wg: "Devices and Sensors Working Group",
         wgURI: "https://www.w3.org/das/",
-        wgPatentURI: "#",
-        testSuiteURI: "#",
+        //wgPatentURI: "",
+        //testSuiteURI: "",
         implementationReportURI: "https://www.w3.org/wiki/DAS/Implementations",
-        otherLinks: [{
-          key: 'Quality Assurance Lead',
-          data: [{
-            value: '#',
-            href: '#'
-          }]
-        }],
+        //otherLinks: [{
+        //  key: 'Quality Assurance Lead',
+        //  data: [{
+        //    value: '#',
+        //    href: ''
+        //  }]
+        //}],
         xref: "web-platform"
       };
     </script>
@@ -80,9 +81,8 @@
         discussions will find the specification changing out from under them in
         incompatible ways.</strong> Vendors interested in implementing this
         specification before it eventually reaches the Candidate Recommendation
-        phase should <a href=
-        "#">subscribe to the
-        repository on GitHub</a> and take part in the discussions.
+        phase should <a href="https://github.com/diekus/fold-angle/">
+        subscribe to the repository on GitHub</a> and take part in the discussions.
       </p>
     </section>
     <section>
@@ -205,7 +205,7 @@
         {{ScreenFoldPosture}} enum values.
       </p>
     </section>
-    <section data-link-for="ScreenFoldMediaQueries">
+    <section data-link-for="ScreenFoldPosture">
       <h3>Screen Fold Media Queries</h3>
       <h4>
         The <code>'screen-fold-posture'</code> media feature
