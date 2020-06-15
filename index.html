@@ -45,7 +45,7 @@
         --drawing-size: 10rem;
       }
 
-      .posture-drawing {
+      .drawing {
         width: var(--drawing-size);
         object-fit: contain;
       }
@@ -94,6 +94,16 @@
         when the device folds, it physically forms an angle. The main interest in knowing the fold angle is because there
          are opportunities in responsive design that enable new user experiences.
       </p>
+      <p>Among the described "folding" devices, there are mainly two different physical form factors: devices with a single
+         flexible screen (seamless), and devices with two screens (with seam). They can both fold around a hinge, and the 
+         current specification applies to both types. It should be clarified as well that both seamless and (devices) with seam
+         can be of different dimension ranging from mobile and tablets to laptop sizes. It should also be noted that different
+         devices will have different default orientations (portrait or landscape), and that the fold might happen in a vertical
+         or horizontal way.    
+      </p>
+      <span class="centered">
+        <img src="images/form-factors.svg" height="250px" alt="drawing of different type of foldable devices">
+      </span>
       <p>
         From enhancing the usability of a website by avoiding the area of a fold, to enabling innovative use cases for the 
         web, knowing the fold angle can help developers tailor their content to different devices. It can also enable to 
@@ -163,7 +173,6 @@
         </p>
       </section>
     </section>
-
     <section data-link-for="ScreenFoldPosture">
       <h2>
         Posture modes
@@ -173,28 +182,28 @@
         <dfn data-export="">posture</dfn> values:
       </p>
       <ol class="postures">
-        <img src="images/laptop-mode-graphic.svg" class="posture-drawing" alt="drawing of laptop mode">
+        <img src="images/laptop-mode-graphic.svg" class="drawing" alt="drawing of laptop mode">
         <li>
           <a>Laptop</a> posture indicates that the device is being used as
           a traditional laptop, meaning one screen is placed on a more or
           less horizontal surface with a screen angle between 180 to 0 degrees.
         </li>
-        <img src="images/flat-mode-graphic.svg" class="posture-drawing" alt="drawing of flat mode">
+        <img src="images/flat-mode-graphic.svg" class="drawing" alt="drawing of flat mode">
         <li>
           <a>Flat</a> posture indicates that one screen is being placed on
           a more or less horizontal surface with a screen angle around 180 degrees.
         </li>
-        <img src="images/tent-mode-graphic.svg" class="posture-drawing" alt="drawing of tent mode">
+        <img src="images/tent-mode-graphic.svg" class="drawing" alt="drawing of tent mode">
         <li>
           <a>Tent</a> posture indicates that the edges of both screens are placed
           on a horizontal surface but with an angle > 180 degrees.
         </li>        
-        <img src="images/tablet-mode-graphic.svg" class="posture-drawing" alt="drawing of tablet mode">
+        <img src="images/tablet-mode-graphic.svg" class="drawing" alt="drawing of tablet mode">
         <li>
           <a>Tablet</a> posture is when the device can turn around on its hinge all the way to have
           the screen back to back. The angle is considered to be around 360 degrees.
         </li>
-        <img src="images/book-mode-graphic.svg" class="posture-drawing" alt="drawing of book mode">
+        <img src="images/book-mode-graphic.svg" class="drawing" alt="drawing of book mode">
         <li>
           <a>Book</a> posture is when the device is used between around 50 and 160 degrees. 
           It is generally used while being held on (not on a surface).
@@ -206,10 +215,10 @@
       </p>
     </section>
     <section data-link-for="ScreenFoldMediaQueries">
-      <h3>Screen Fold Media Queries</h3>
-      <h4>
+      <h2>Screen Fold Media Queries</h2>
+      <h3>
         The <code>'screen-fold-posture'</code> media feature
-      </h4>
+      </h3>
       <p>
         The <code><dfn>screen-fold-posture</dfn></code> media feature represents,
         via a CSS media query [[MEDIAQ]], the <a>posture</a> of the device.
@@ -243,9 +252,9 @@
         application via a CSS media query [[MEDIAQ]].
       </p>
       
-      <h4>
+      <h3>
         The <code>'screen-fold-angle'</code> media feature
-      </h4>
+      </h3>
       <p>
         The <code><dfn>screen-fold-angle</dfn></code> media feature represents,
         via a CSS media query [[MEDIAQ]], the <a class="production css" href="https://drafts.csswg.org/css-values-3/#angle-value">&lt;angle&gt;</a> of the device.
@@ -305,7 +314,7 @@
       </p>
       <h4>Horizontal Fold</h4>
       <span class="postures">
-        <img src="images/horizontal-fold.svg" class="posture-drawing" alt="drawing of a device with a vertical fold">
+        <img src="images/horizontal-fold.svg" class="drawing" alt="drawing of a device with a vertical fold">
         <p>
           Devices with a horizontal fold are the ones for which in their 
         main form factor, the folding occurs from side to side, across 
@@ -390,7 +399,7 @@
       </table>
       <h4>Vertical Fold</h4>
       <span class="postures">
-        <img src="images/vertical-fold.svg" class="posture-drawing" alt="drawing of a device with a horizontal fold">
+        <img src="images/vertical-fold.svg" class="drawing" alt="drawing of a device with a horizontal fold">
         <p>
           Devices with a vertical fold are the ones for which in their main form 
           factor, the folding occurs from top to bottom, across the screen(s).
