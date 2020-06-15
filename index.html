@@ -63,6 +63,15 @@
         grid-template: 1fr / auto auto;
         grid-gap: 2rem;
       }
+
+      @media (max-width: 500px) { /*for narrow displays like the fold*/
+        .postures {
+          display: flex;
+          flex-flow: column nowrap;
+          justify-content: center;
+        }
+      }
+
     </style>
   </head>
   <body data-cite="FEATURE-POLICY PERMISSIONS CSSOM-VIEW SCREEN-ORIENTATION">
@@ -102,7 +111,7 @@
          or horizontal way.    
       </p>
       <span class="centered">
-        <img src="images/form-factors.svg" height="250px" alt="drawing of different type of foldable devices">
+        <img src="images/form-factors.svg" alt="drawing of different type of foldable devices">
       </span>
       <p>
         From enhancing the usability of a website by avoiding the area of a fold, to enabling innovative use cases for the 
