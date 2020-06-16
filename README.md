@@ -1,4 +1,4 @@
-# Fold Angle API
+# Screen Fold API
 
 !['drawing of different postures'](https://github.com/diekus/fold-angle/blob/master/images/postures.png?raw=true)
 
