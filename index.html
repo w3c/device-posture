@@ -7,6 +7,7 @@
     </title>
     <script src='https://www.w3.org/Tools/respec/respec-w3c' async class=
     'remove'></script>
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
     <script class='remove'>
       const respecConfig = {
         specStatus: "unofficial",
@@ -650,12 +651,23 @@
       <h2>
         Examples
       </h2>
+      <h3>Example 1</h3>
       <pre class="example js" title="React to poster change">
           screen.fold.addEventListener("change", () => {
             const { angle, posture } = screen.fold;
             console.log(`The current screen angle is ${angle}, which means it is in ${posture} posture!`);
           })
       </pre>
+      
+      <h3>Example 2</h3>
+      <img src="images/example-videocall.svg" height="500px">
+      <pre class="example css" title="Adapting UI to posture">
+        @media (screen-posture:laptop) and (spanning: single-fold-horizontal){
+
+        }
+      </pre>
+      
+
     </section>
     <section>
       <h2>
