@@ -651,7 +651,7 @@
       <h2>
         Examples
       </h2>
-      <h3>Example 1</h3>
+      <h3>Example 1: screen.fold data</h3>
       <p>This is a simple use case of the <a>posture</a> and <a href="#the-angle-attribute-get-current-screen-fold-angle">angle</a> value being printed on the console. </p>
       <pre class="example js" title="React to poster change">
           screen.fold.addEventListener("change", () => {
@@ -660,13 +660,14 @@
           })
       </pre>
       
-      <h3>Example 2</h3>
+      <h3>Example 2: screen-fold-posture</h3>
       <p>The device is being used for a video call web service. It can be folded into the laptop posture to
         enable a hands-free when placed on a surface. The UA detects the posture and the UI is enhanced.
+        Similar examples can be drafted for content to adapt to any posture. See the <a href="https://github.com/SamsungInternet/Explainers/blob/master/Foldables/FoldState.md#key-scenarios">explainer</a> for other key scenarios.
       </p>
       <img src="images/example-videocall.svg" height="500px">
       <pre class="example css" title="Adapting UI to posture">
-        @media (screen-posture:laptop) and (spanning: single-fold-horizontal){
+        @media (screen-fold-posture:laptop) and (spanning: single-fold-horizontal){
           body {
             display: flex;
             flex-flow: column nowrap;
@@ -677,6 +678,13 @@
           }
         }
       </pre>
+
+      <h3>Example 3: screen-fold-angle</h3>
+      <p>
+        Some scenarios might span outside of the default <a>postures</a> envisioned in this document.
+        The screen-fold-angle media feature allows to define a range or threshold for the layout to 
+        change. 
+      </p>
       
 
     </section>
