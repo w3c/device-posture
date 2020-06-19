@@ -1,0 +1,46 @@
+<html>
+<body>
+  <script type='module' src="./index.js"></script>
+  <script type='module'>
+    import { ScreenFoldFeature } from "./index.js";
+
+    const slider = document.querySelector("#slider");
+    const feature = new ScreenFoldFeature;
+    slider.onchange = ev => {
+      feature.angle = ev.target.value;
+    }
+
+    const select = document.querySelector("#select");
+    select.onchange = ev => {
+      feature.orientation = ev.target.value;
+    }
+
+    const postureEl = document.querySelector("#posture");
+    const angleEl = document.querySelector("#angle");
+    window.screen.fold.addEventListener("change", () => {
+      postureEl.textContent = screen.fold.posture;
+      angleEl.textContent = screen.fold.angle;
+    })
+    window.screen.fold.dispatchEvent(new Event('change'));
+  </script>
+  <div>
+    <span id=posture>N/A</span>
+    <span id=angle>N/A</span>
+  </div>
+  <br><br>
+  <div>
+    <input type="range" id="slider" name="angle"
+           min="0" max="360">
+    <label for="angle">Angle</label>
+    <br>
+    <select name="orientation" id="select">
+      <option value="none">No override</option>
+      <option value="portrait-primary">Portrait (primary)</option>
+      <option value="portrait-secondary">Portrait (secondary)</option>
+      <option value="landscape-primary">Landscape (primary)</option>
+      <option value="landscape-secondary">Landscape (secondary)</option>
+    </select>
+    <label for="orientation">Orientation override</label>
+  </div>
+</body>
+</html>
