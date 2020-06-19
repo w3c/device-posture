@@ -176,7 +176,7 @@
           "flat",
           "tent",
           "tablet",
-          "book",          
+          "book"
         };
       </pre>
       <section>
@@ -652,6 +652,7 @@
         Examples
       </h2>
       <h3>Example 1</h3>
+      <p>This is a simple use case of the <a>posture</a> and <a href="#the-angle-attribute-get-current-screen-fold-angle">angle</a> value being printed on the console. </p>
       <pre class="example js" title="React to poster change">
           screen.fold.addEventListener("change", () => {
             const { angle, posture } = screen.fold;
@@ -660,10 +661,20 @@
       </pre>
       
       <h3>Example 2</h3>
+      <p>The device is being used for a video call web service. It can be folded into the laptop posture to
+        enable a hands-free when placed on a surface. The UA detects the posture and the UI is enhanced.
+      </p>
       <img src="images/example-videocall.svg" height="500px">
       <pre class="example css" title="Adapting UI to posture">
         @media (screen-posture:laptop) and (spanning: single-fold-horizontal){
+          body {
+            display: flex;
+            flex-flow: column nowrap;
+          }
 
+          .videocall-area, .videocall-controls  {
+            flex: 1 1 env(fold-bottom);
+          }
         }
       </pre>
       
