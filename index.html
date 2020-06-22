@@ -82,6 +82,11 @@
         grid-gap: 2rem;
       }
 
+      section img {
+        width: 100%;
+        height: auto;
+      }
+
       @media (max-width: 500px) { /*for narrow displays like the fold*/
         .postures {
           display: flex;
@@ -665,7 +670,7 @@
         enable a hands-free when placed on a surface. The UA detects the posture and the UI is enhanced.
         Similar examples can be drafted for content to adapt to any posture. See the <a href="https://github.com/SamsungInternet/Explainers/blob/master/Foldables/FoldState.md#key-scenarios">explainer</a> for other key scenarios.
       </p>
-      <img src="images/example-videocall.svg" >
+      <img src="images/example-videocall.svg" class="img-example" >
       <pre class="example css" title="Adapting UI to posture">
         @media (screen-fold-posture:laptop) and (spanning: single-fold-horizontal){
           body {
