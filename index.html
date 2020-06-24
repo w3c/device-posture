@@ -346,7 +346,11 @@
       </p>
       <p><i>These tables are non-normative.</i></p>
       <h3><dfn>Posture values table</dfn></h3>
+      <p>The values are approximations and might differ per device. For instance, a device might not yield exactly 180° when laying flat, but instead values ranging from 175° to 185°. Device makers SHOULD make sure that the physical device postures map correctly to the postures defined by this specification.</p>
+
+        <p>Some devices might also lack one or more of the postures due to physical constraints or device design, in which case the device SHOULD make sure that all combinations of angles and device orientation (which can be locked by [[SCREEN-ORIENTATION]] and host OS) maps into one of the defined postures.</p>
       <p>
+        <img src="images/angle-graphic.svg">
         The <a>posture values table</a> shows how the {{posture}}
         values are derived depending on the orientation of the fold:
       </p>
@@ -386,7 +390,7 @@
               <i><a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-portrait-primary">"portrait-primary"</a> | <a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-portrait-secondary">"portrait-secondary"</a></i>
             </td>
             <td>
-              `[110°`-`175°[`
+              `[0° - 140°[`
             </td>
           </tr>
           <tr>
@@ -397,7 +401,7 @@
               <i>any orientation</i>
             </td>
             <td>
-              `]175° - 185°[`
+              `[140° - 185°[`
             </td>
           </tr>
           <tr>
@@ -408,7 +412,7 @@
               <i>any orientation</i>
             </td>
             <td>
-              `]185° - 360°[`
+              `[185° - 335°[`
             </td>
           </tr>
           <tr>
@@ -419,7 +423,7 @@
               <i>any orientation</i>
             </td>
             <td>
-              `360°`
+              `[335° - 360°]`
             </td>
           </tr>
           <tr>
@@ -430,7 +434,7 @@
               <i><a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-landscape-primary">"landscape-primary"</a> | <a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-landscape-secondary">"landscape-secondary"</a></i>
             </td>
             <td>
-              `]0° - 110°[`
+              `[0° - 140°[`
             </td>
           </tr>
         </tbody>
@@ -469,7 +473,7 @@
               <i><a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-landscape-primary">"landscape-primary"</a> | <a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-landscape-secondary">"landscape-secondary"</a></i>
             </td>
             <td>
-              `[110°` - `175°[`
+              `[0° - 140°[`
             </td>
           </tr>
           <tr>
@@ -480,7 +484,7 @@
               <i>any orientation</i>
             </td>
             <td>
-              `]175° - 185°[` 
+              `[140° - 185°[` 
             </td>
           </tr>
           <tr>
@@ -491,7 +495,7 @@
               <i>any orientation</i>
             </td>
             <td>
-              `]185° - 360°[`
+              `[185° - 335°[`
             </td>
           </tr>
           <tr>
@@ -502,7 +506,7 @@
               <i>any orientation</i>
             </td>
             <td>
-              `360°` 
+              `[335° - 360°]` 
             </td>
           </tr>
           <tr>
@@ -513,7 +517,7 @@
               <i><a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-portrait-primary">"portrait-primary"</a> | <a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-portrait-secondary">"portrait-secondary"</a></i>
             </td>
             <td>
-              `]0° - 110°[`
+              `[0° - 140°[`
             </td>
           </tr>
         </tbody>
@@ -691,6 +695,11 @@
         change. 
       </p>
       
+      <h3>Example 4: animation with screen.fold.angle</h3>
+      <p>
+        Opening and closing a device might include animations linked to the value of the angle of the fold.
+        This allows the creation of content that can mimic the effect of a pop-up book. 
+      </p>
 
     </section>
     <section>
