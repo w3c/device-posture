@@ -21,7 +21,7 @@ The **main interest in knowing the fold angle is because there are interesting o
 
 ## Proposals
 
-### New CSS media queries: `min-angle` `max-angle` 
+### New CSS media query: `screen-fold-angle` 
 
 In order to cater to foldable devices, we propose the addition of 2 new media queries `min-angle` and `max-angle` which values can take an angle from the CSS data type.
 
