@@ -1,6 +1,6 @@
-# Screen Fold API
+!['Screen Fold API logo'](https://raw.githubusercontent.com/diekus/fold-angle/master/images/favicon.png)
 
-!['drawing of different postures'](https://github.com/diekus/fold-angle/blob/master/images/postures.png?raw=true)
+# Screen Fold API
 
 ## Authors
 * [Diego González-Zúñiga](https://twitter.com/diekus) ([Samsung](https://samsunginter.net))
@@ -88,3 +88,5 @@ Many thanks for valuable feedback and advice from:
 * [Alexis Menard](https://twitter.com/darktears), [Intel](https://intel.com) 
 * [Jo Balletti](https://twitter.com/thisisjofrank), [Ably Realtime](https://ably.io)
 * [Michael Blix](https://twitter.com/mkeblx), [Samsung](https://samsunginter.net) 
+
+!['drawing of different postures'](https://github.com/diekus/fold-angle/blob/master/images/postures.png?raw=true)
