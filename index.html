@@ -83,8 +83,10 @@
       }
 
       section img {
-        width: 100%;
+        width: 70%;
         height: auto;
+        margin:auto;
+        display: flex;
       }
 
       @media (max-width: 500px) { /*for narrow displays like the fold*/
@@ -676,7 +678,7 @@
       </p>
       <img src="images/example-videocall.svg" class="img-example" >
       <pre class="example css" title="Adapting UI to posture">
-        @media (screen-fold-posture:laptop) and (spanning: single-fold-horizontal){
+        @media (screen-fold-posture: laptop) and (spanning: single-fold-horizontal){
           body {
             display: flex;
             flex-flow: column nowrap;
@@ -694,6 +696,17 @@
         The screen-fold-angle media feature allows to define a range or threshold for the layout to 
         change. 
       </p>
+      <p>As an example, an experience that might require a separate viewing area by user (like a game)
+        might find that the default 185° starting angle for the tent posture is too "open" to guarantee
+        one user will not see the other user's screen. Using screen-fold-angle the threshold can be 
+        defined by the developer.</p>
+        <img src="images/example-screen-fold-angle.svg" alt="diagram of an example that uses an angle range to tailor content">
+        <pre class="example css" title="Defining angle ranges for content">
+          @media (min-screen-fold-angle: 270deg) {
+            /*enable custom layout for the app*/ 
+          }
+
+        </pre>
       
       <h3>Example 4: background color set by value of the angle</h3>
       <p>Uses the environa</p>
