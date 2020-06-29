@@ -38,6 +38,7 @@ In order to cater to foldable devices, we propose the addition of 2 new media qu
 We also propose a media query that would resolve to a set of fixed postures. These postures consist of a number of predefined values that each encompass a range of angles.
 
 Among the values that the screen-posture query can take are:
+* No Fold
 * Laptop
 * Tent
 * Tablet
