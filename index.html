@@ -708,11 +708,31 @@
 
         </pre>
 
-      <h3>Example 4: animation with screen.fold.angle</h3>
+      <h3>Example 4: Animation</h3>
       <p>
         Opening and closing a device might include animations linked to the value of the angle of the fold.
-        This allows the creation of content that can mimic the effect of a pop-up book. 
+        This allows the creation of content that can mimic the effect of a pop-up book.  
       </p>
+      <p>Another example can be mapping the state of the fold of a device to transformations of a DOM element.
+        With this approach you could rotate an element based on the value of the angle.</p>
+        <img src="images/exampler-animation.svg" alt="diagram of an img element rotating on the center of a webpage">
+        <pre class="example js" title="Element animation based on fold value (JS)">
+          let fish = document.querySelector('.fish-circle');
+          
+          ScreenFold.addEventListener('change', function(e) {
+            //animation keyframes
+            let rotationFish = [
+              {transform: `rotate(${e.angle})`, easing: 'ease-out'}
+            ];
+
+            fish.animate(rotationFish, 100);
+          };
+        </pre>
+        <pre class="example css" title="Element animation based on fold value (CSS)">
+          .fish-circle {
+            transform: rotate(env(screen-fold-angle));
+          }
+        </pre>
 
     </section>
     <section>
