@@ -1,4 +1,4 @@
-!['Screen Fold API logo'](https://raw.githubusercontent.com/diekus/fold-angle/master/images/favicon.png)
+!['Screen Fold API logo'](https://raw.githubusercontent.com/diekus/fold-angle/master/images/sf-logo-s.png)
 
 # Screen Fold API
 
