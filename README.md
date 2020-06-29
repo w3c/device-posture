@@ -28,9 +28,9 @@ In order to cater to foldable devices, we propose the addition of 2 new media qu
 #### Examples
 
 ```css
-@media(min-angle: 110deg) { ... }
+@media(min-screen-fold-angle: 110deg) { ... }
 
-@media(max-angle: 170deg) and (spanning: single-fold-vertical) { ... }
+@media(max-screen-fold-angle: 170deg) and (spanning: single-fold-vertical) { ... }
 ```
 
 ### New CSS media query: `screen-fold-posture`
