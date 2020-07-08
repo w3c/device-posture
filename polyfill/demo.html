@@ -1,4 +1,30 @@
 <html>
+  <style>
+    @media (screen-fold-posture: tent) {
+      body {
+        background: yellow;
+      }
+    }
+
+    @media (screen-fold-posture: laptop) {
+      body {
+        background: green;
+      }
+    }
+
+    @media (screen-fold-posture: laptop) and (min-screen-fold-angle: 150) {
+      body {
+        background: red;
+      }
+    }
+
+    @media (screen-fold-posture: laptop) and (max-screen-fold-angle: 100) {
+      body {
+        background: pink;
+      }
+    }
+
+  </style>
 <body>
   <script type='module' src="./index.js"></script>
   <script type='module'>
