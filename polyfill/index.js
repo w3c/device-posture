@@ -50,7 +50,7 @@ export class ScreenFoldFeature extends ScreenFold {
     }
 
     super();
-  
+
     window.screen.orientation.addEventListener("change", this._updatePosture);
 
     // Web-based emulator runs this polyfill in an iframe, we need to
@@ -114,3 +114,94 @@ export class ScreenFoldFeature extends ScreenFold {
 
 window[ns] = new ScreenFoldFeature;
 window.screen.fold = new ScreenFold;
+
+
+function _matchAll(cssText, regexp) {
+  let results;
+  if (typeof cssText.matchAll === "function") {
+    results = Array.from(cssText.matchAll(regexp));
+  } else {
+    results = [];
+
+    while (results[results.length] = regex.exec(cssText));
+    results.length--;
+  }
+  return results;
+}
+
+const MEDIA_BLOCK_REGEXP_STR =
+`(\\s*)(@media.*?\\b(?:screen-fold-angle|screen-fold-posture)\\b[^{]+)\\{([\\s\\S]+?\\})(\\s*)\\}`;
+
+function getAffectedCSSTextEvaluators(cssText) {
+  const mediaBlocks = _matchAll(cssText, new RegExp(MEDIA_BLOCK_REGEXP_STR, "gi"));
+
+  let evaluators = [];
+
+  mediaBlocks.forEach(block => {
+    const indentStart = block[1];
+    const definition = block[2];
+    const content = block[3];
+    const indentEnd = block[4];
+
+    const posture = definition.match(/\((?:screen-fold-posture):\s*(.*?)\s*\)/i);
+    const extAngle = definition.match(/\((?:screen-fold-angle):\s*(.*?)\s*\)/i);
+    const minAngle = definition.match(/\((?:min-screen-fold-angle):\s*(.*?)\s*\)/i);
+    const maxAngle = definition.match(/\((?:max-screen-fold-angle):\s*(.*?)\s*\)/i);
+
+    const mediaTypes = definition.match(/@media[^\(]+/gi) || [];
+    let mediaFeatures = definition.match(/\((.*?)\)/gi) || [];
+
+    mediaFeatures = mediaFeatures
+      .filter(f => !f.includes("screen-fold-"))
+      .join(" and ");
+
+      evaluators.push((postureValue, angleValue) => {
+      if (posture && posture[1] !== postureValue) return null;
+      if (extAngle && Number(extAngle[1]) !== angleValue) return null;
+      if (minAngle && Number(minAngle[1]) > angleValue) return null;
+      if (maxAngle && Number(maxAngle[1]) < angleValue) return null;
+      return `${indentStart}${mediaTypes}${mediaFeatures}{${content}${indentEnd}}`;
+    });
+  });
+
+  return evaluators;
+}
+
+const fetchCSSText = elements => Promise.all(
+  elements.map(element => element.href ? fetch(element.href).then(r => r.text()) : element.textContent)
+);
+
+const cssElements = Array.from(
+  document.querySelectorAll('link[rel="stylesheet"], style')
+);
+
+let evaluators = [];
+
+fetchCSSText(cssElements).then(sheetsTextContentArray => {
+  const styleFragment = new DocumentFragment();
+  sheetsTextContentArray.forEach((sheet, i) => {
+    evaluators = evaluators.concat(getAffectedCSSTextEvaluators(sheet));
+  });
+});
+
+const replaceInjectedCSS = (target, sheet) => {
+  for (let el of target.querySelectorAll(`.${ns}`)) {
+    el.remove();
+  }
+  const el = document.createElement("style");
+  el.className = ns;
+  el.textContent = sheet;
+  target === document ? document.head.appendChild(el) : target.appendChild(el);
+}
+
+screen.fold.addEventListener("change", () => {
+  let cssText = "";
+  for (let fn of evaluators) {
+    const css = fn(screen.fold.posture, screen.fold.angle);
+    if (css) {
+      cssText += css;
+    }
+  }
+
+  replaceInjectedCSS(document, cssText);
+})
