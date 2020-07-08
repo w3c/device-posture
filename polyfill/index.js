@@ -66,15 +66,15 @@ export class ScreenFoldFeature extends ScreenFold {
   _updatePosture() {
     const angle = this.angle;
     let posture = "no-fold";
-    if (angle >= 0 && angle < 175) {
+    if (angle >= 0 && angle < 140) {
       if (this.orientation.startsWith("portrait")) {
         posture = "book";
       } else {
         posture = "laptop";
       }
-    } else if (angle >= 175 && angle <= 185) {
+    } else if (angle >= 140 && angle <= 185) {
       posture = "flat";
-    } else if (angle > 185 && angle < 355) {
+    } else if (angle > 185 && angle < 335) {
       posture = "tent";
     } else {
       posture = "tablet";
