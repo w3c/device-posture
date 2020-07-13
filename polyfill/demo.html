@@ -1,5 +1,50 @@
 <html>
   <style>
+    
+    /*device rep styles*/
+    body {
+      /* display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: center;
+      align-content: center; */
+      perspective: 1000px;
+      perspective-origin: top left;
+      transform-style: preserve-3d;
+    }
+
+    .device {
+      background-color: #FFF;
+      border: #3d3d3d solid 8px;
+      border-radius: 15px;
+      width: 150px;
+      height: 150px;
+      transform: rotateY(30deg);
+      transition: transform .5s ease-out;
+      backface-visibility: visible;
+      
+    }
+
+    .bottom {
+      border-top: #FF0076 dotted 8px;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      transform-origin: top center;
+      transform: rotateY(30deg) rotateX(0deg);
+    }
+
+    .top {
+      border-bottom: #FF0076 dotted 8px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      transform-origin: bottom center;
+    }
+
+    .logo {
+      height: 5rem;
+    }
+
+    /*media queries*/
     @media (screen-fold-posture: tent) {
       body {
         background: yellow;
@@ -23,10 +68,12 @@
         background: pink;
       }
     }
+
+
   </style>
 <body>
   <script type='module' src="./index.js"></script>
-  <script type='module' src="./foldangle-settings.js"></script>
+  <script type='module' src="./screenfold-settings.js"></script>
   <script type='module'>
     const postureEl = document.querySelector("#posture");
     const angleEl = document.querySelector("#angle");
@@ -36,11 +83,26 @@
     })
     window.screen.fold.dispatchEvent(new Event('change'));
   </script>
-  <div>
+  <header>
+    <img src="../images/sf-logo-title.svg" class="logo">
+  </header>
+  <section>
     <span id=posture>N/A</span>
     <span id=angle>N/A</span>
-  </div>
+  </section>
   <br><br>
+  <section>
+    <div class="device top"></div>
+    <div class="device bottom"></div>
+  </section>
   <foldangle-settings></foldangle-settings>
+<br><br>
+
+<br><br>
+<screenfold-settings></screenfold-settings>
+
+
+  
+
 </body>
 </html>

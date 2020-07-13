@@ -1,5 +1,7 @@
-import { LitElement, css, html } from 'https://cdn.pika.dev/lit-element@^2.3.1';
+// import { LitElement, css, html } from 'https://cdn.pika.dev/lit-element@^2.3.1';
 import { ScreenFoldFeature } from "./index.js";
+
+
 
 customElements.define("foldangle-settings", class extends LitElement {
   static styles = css`
