@@ -1,46 +1,35 @@
-<html>
-  <style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type='module' defer src="screenfold-settings.js"></script>
+    <style>
+    /*media queries*/
     @media (screen-fold-posture: tent) {
-      body {
+        body {
         background: yellow;
-      }
+        }
     }
-
-    @media (screen-fold-posture: laptop) {
-      body {
+    @media (screen-fold-posture: tablet) {
+        body {
         background: green;
-      }
+        }
     }
-
     @media (screen-fold-posture: laptop) and (min-screen-fold-angle: 150) {
-      body {
+        body {
         background: red;
-      }
+        }
     }
-
     @media (screen-fold-posture: laptop) and (max-screen-fold-angle: 100) {
-      body {
+        body {
         background: pink;
-      }
+        }
     }
-  </style>
+    </style>
+    <title>Screen Fold Polyfill demo</title>
+</head>
 <body>
-  <script type='module' src="./index.js"></script>
-  <script type='module' src="./foldangle-settings.js"></script>
-  <script type='module'>
-    const postureEl = document.querySelector("#posture");
-    const angleEl = document.querySelector("#angle");
-    window.screen.fold.addEventListener("change", () => {
-      postureEl.textContent = screen.fold.posture;
-      angleEl.textContent = screen.fold.angle;
-    })
-    window.screen.fold.dispatchEvent(new Event('change'));
-  </script>
-  <div>
-    <span id=posture>N/A</span>
-    <span id=angle>N/A</span>
-  </div>
-  <br><br>
-  <foldangle-settings></foldangle-settings>
+    <screenfold-settings></screenfold-settings>
 </body>
 </html>
