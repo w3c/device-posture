@@ -1,4 +1,4 @@
-import { ScreenFoldFeature } from "./index.js";
+import { ScreenFoldFeature } from "./sfold-polyfill.js";
 class ScreenFoldSettings extends HTMLElement {
 
   constructor() {
@@ -114,6 +114,9 @@ class ScreenFoldSettings extends HTMLElement {
       <option value="landscape-secondary">Landscape (secondary)</option>`;
     sel_orientation.onchange = ev => {
       feature.orientation = ev.target.value;
+      if(ev.target.value == 'none') { screen.orientation.unlock(); }
+      else { screen.orientation.lock(ev.target.value); }
+      txt_state_info.innerText = `${screen.fold.angle}° (${screen.fold.posture})`;
     };
     settings_form.appendChild(lbl_orientation);
     settings_form.appendChild(sel_orientation);
