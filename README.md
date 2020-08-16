@@ -1,4 +1,4 @@
-!['Screen Fold API logo'](https://raw.githubusercontent.com/diekus/screen-fold/master/images/sf-logo-s.png)
+!['Screen Fold API logo'](https://raw.githubusercontent.com/w3c/screen-fold/master/images/sf-logo-s.png)
 
 # Screen Fold API
 
@@ -90,4 +90,4 @@ Many thanks for valuable feedback and advice from:
 * [Jo Balletti](https://twitter.com/thisisjofrank), [Ably Realtime](https://ably.io)
 * [Michael Blix](https://twitter.com/mkeblx), [Samsung](https://samsunginter.net) 
 
-!['drawing of different postures'](https://github.com/diekus/screen-fold/blob/master/images/postures.png?raw=true)
+!['drawing of different postures'](https://github.com/w3c/screen-fold/blob/master/images/postures.png?raw=true)
