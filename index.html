@@ -44,9 +44,7 @@
           }
         ],
         github: "https://github.com/w3c/screen-fold",
-        wg: "Devices and Sensors Working Group",
-        wgURI: "https://www.w3.org/das/",
-        //wgPatentURI: "",
+        group: "das",
         //testSuiteURI: "",
         implementationReportURI: "https://www.w3.org/wiki/DAS/Implementations",
         otherLinks: [{
@@ -100,6 +98,9 @@
         }
       }
 
+      html {
+        background-repeat-y: no-repeat !important;
+      }
     </style>
   </head>
   <body data-cite="FEATURE-POLICY PERMISSIONS CSSOM-VIEW SCREEN-ORIENTATION">
@@ -158,7 +159,7 @@
         Extensions to the `Screen` interface
       </h2>
       <p>
-        The [[cssom-view]] specification defines the {{Screen}} interface,
+        The [[cssom-view]] specification defines the <dfn>Screen</dfn> interface,
         which this specification extends:
       </p>
       <pre class="idl">
