@@ -637,13 +637,14 @@
         Security and Privacy considerations
       </h2>
       <p>
-        The Screen Fold API exposes two types of information:
+        The Screen Fold API exposes two kinds of information:
         <ol class="algorithm">
           <li>
-            an |angle| value coming from the hinge position
+            an <a href="#the-angle-attribute-get-current-screen-fold-angle">angle</a> value
+            representing the hinge position
           </li>
           <li>
-            A |posture| determined from the angle value
+            A <a>posture</a> determined from the angle value
           </li>
         </ol>
       </p>
@@ -704,7 +705,7 @@
             Secure Context
           </h4>
           <p>
-            Postures value and fold angle readings are explicitly flagged by the Secure Contexts specification as a
+            Posture value and fold angle readings are explicitly flagged by the Secure Contexts specification as a
             high-value target for network attackers. Thus all interfaces defined by this specification or extension
             specifications are only available within a secure context.
           </p>
@@ -714,7 +715,7 @@
             Focused Area
           </h4>
           <p>
-            Postures value and fold angle readings are only available for active documents whose origin is the
+            Posture value and fold angle readings are only available for active documents whose origin is the
             same origin-domain with the currently focused area document.
           </p>
           <p>
@@ -728,7 +729,7 @@
             Visibility State
           </h4>
           <p>
-            Postures value and fold angle readings are only available for the active documents
+            Posture value and fold angle readings are only available for the active documents
             whose visibility state is "visible".
           </p>
         </section>
