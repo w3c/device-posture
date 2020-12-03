@@ -620,30 +620,155 @@
         Security and Privacy considerations
       </h2>
       <p>
-        Exposing the screen fold angle can have some privacy implications when it
-        comes to privacy and security. Specifically, the angle value could be used
-        for browser fingerprinting, in a way that can help fully or partially
-        identify individual users. It is up to the implementer to minimize this,
-        and some proposed solutions are listed below.
+        The Screen Fold API exposes two kinds of information:
+        <ol class="algorithm">
+          <li>
+            an <a href="#the-angle-attribute-get-current-screen-fold-angle">angle</a> value
+            representing the hinge position
+          </li>
+          <li>
+            A <a>posture</a> determined from the angle value
+          </li>
+        </ol>
       </p>
-      <h3>
-        Lowering the resolution of the angle value
-      </h3>
       <p>
-        Lowering the resolution of the angle MAY lead to reducing the uniqueness
-        that the value can have. Nonetheless, if several sites are being displayed
-        on the same device, it can be easy to identify that it is the same user,
-        even if the value is rounded. As a solution, applying some fuzziness to
-        the value itself MAY work.
+        Typical sensor readings are sent at a constant frequency to whomever is listening to its readings.
+        However the fold angle only communicates its value when the hinge is manipulated by the user.
+        Variations in the angle’s readings and posture calculation, as well as event dispatching frequency
+        offer a possibility of fingerprinting to identify users. User agents may reduce this risk by limiting
+        or coalescing events when exposing this information to web developers. Users don’t constantly adjust
+        the angle, so the fold angle value is changing in bursts: the events may be dispatched at a very low
+        frequency most of the time and fire at a high frequency when the device is being opened or closed.
+        In order for the events to be dispatched, the content must be on the foreground and visible to the
+        user.
       </p>
-      <h3>
-        Applying fuzziness to the angle value
-      </h3>
       <p>
-        Lowering the resolution of the returned value may not be enough, so fuzzing
-        out the value can algo help, in order to report different values. This fuzzy
-        offset can help differentiate returned values, minimizing the risk of fingerprinting.
+        Minimizing the accuracy of the angle readout generally decreases the risk of fingerprinting.
+        User agents should not provide unnecessarily verbose readouts of the hinge angle data.
+        Posture values are not very useful values to fingerprint a user. They’re similar in concept
+        with the orientation values. The posture change is only triggered in certain fold angle values
+        providing a very low resolution reading. Because the changes are very sparse changes with very
+        few predefined values, it makes it hard to precisely identify users across sites.
       </p>
+      <p>
+        If the same code using the API can be used simultaneously in different window contexts on the same
+        device it may be possible for that code to correlate the user across those two contexts, creating
+        unanticipated tracking mechanisms.
+      </p>
+      <section>
+        <h3>
+          Types of security and privacy threats
+        </h3>
+        <p>
+          <i>This section is non-normative.</i>
+        </p>
+        <section>
+        <h4>
+          Device Fingerprinting
+        </h4>
+        <p>
+          Sensors can provide information that can uniquely identify the device using those sensors.
+          Every concrete sensor model has minor manufacturing imperfections and differences that will be
+          unique for this model. These manufacturing variations and imperfections can be used to
+          fingerprint the device.
+        </p>
+        </section>
+      </section>
+      <section>
+        <h3>Mitigation Strategies</h3>
+        <p>
+          <i>This section is non-normative.</i>
+        </p>
+        <p>
+          This section gives a high-level presentation of some of the mitigation strategies specified
+          in the normative sections of this specification.
+        </p>
+        <section>
+          <h4>
+            Secure Context
+          </h4>
+          <p>
+            Posture value and fold angle readings are explicitly flagged by the Secure Contexts specification as a
+            high-value target for network attackers. Thus all interfaces defined by this specification or extension
+            specifications are only available within a secure context.
+          </p>
+        </section>
+        <section>
+          <h4>
+            Focused Area
+          </h4>
+          <p>
+            Posture value and fold angle readings are only available for active documents whose origin is the
+            same origin-domain with the currently focused area document.
+          </p>
+          <p>
+            This is done in order to mitigate the risk of a skimming attack against the browsing context
+            containing an element which has gained focus, for example when the user carries out an in-game
+            purchase using a third party payment service from within an iframe.
+          </p>
+        </section>
+        <section>
+          <h4>
+            Visibility State
+          </h4>
+          <p>
+            Posture value and fold angle readings are only available for the active documents
+            whose visibility state is "visible".
+          </p>
+        </section>
+      </section>
+      <section>
+        <h3>Mitigation strategies applied on a case by case basis</h3>
+        <section>
+          <h4>
+            Limit maximum sampling frequency
+          </h4>
+          <p>
+            User agents may mitigate certain threats by limiting the maximum sampling frequency.
+            Coalishing and aligning the fold angle readings with the animation frame would limit
+            the fingerprinting while still allowing animations responding to the fold angle. Limiting
+            the maximum sampling frequency prevents use cases which rely on low latency or high
+            data density.
+          </p>
+        </section>
+        <section>
+          <h4>
+            Limit number of delivered readings
+          </h4>
+          <p>
+            An alternative to limiting the maximum sampling frequency is to limit the number of sensor
+            readings delivered to Web application developers, regardless of what frequency the sensor
+            is polled at. This allows use cases which have low latency requirements to increase sampling
+            frequency without increasing the amount of data provided. Discarding intermediary readings
+            prevents certain use cases, such as those relying on certain kinds of filters.
+            User agent should wait before sending the angle value changes after a minimum of degrees
+            changes to remove the noise as well as to avoid getting events while the user is just
+            interacting with the screen. This would limit identifying users with shaky hands.
+          </p>
+        </section>
+        <section>
+          <h4>
+            Reduce accuracy
+          </h4>
+          <p>
+            Lowering the resolution of the angle MAY lead to reducing the uniqueness
+            that the value can have. Nonetheless, if several sites are being displayed
+            on the same device, it can be easy to identify that it is the same user,
+            even if the value is rounded. As a solution, applying some fuzziness to
+            the value itself MAY work.
+          </p>
+        </section>
+        <section>
+          <h3>
+            Applying fuzziness to the angle value
+          </h3>
+          <p>
+            Lowering the resolution of the returned value may not be enough, so fuzzing
+            out the value can algo help, in order to report different values. This fuzzy
+            offset can help differentiate returned values, minimizing the risk of fingerprinting.
+          </p>
+        </section>
+      </section>
     </section>
     <section id="examples" class="informative">
       <h2>
