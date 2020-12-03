@@ -721,6 +721,18 @@
           }
         </pre>
 
+        <h3>Example 6: Feature detection of screen-fold-posture</h3>
+        <p>
+          As one of the valid screen-fold-posture values will always be true, you can use the following
+          snippet to detect whether a user agent supports the media feature:
+        </p>
+        <pre class="example css" title="Feature detect the screen-fold-posture">
+          @media (screen-fold-posture) {
+            /*The browser supports screen-fold-posture feature*/
+          }
+        </pre>
+        For more information about media features in a boolean context please refer to
+        <a>Evaluating Media Features in a Boolean Context.</a>
     </section>
     <section>
       <h2>
@@ -729,6 +741,10 @@
       <p>
         The following concepts and interfaces are defined in [[SCREEN-ORIENTATION]]:
         <dfn>current screen orientation</dfn> as represented by the {{OrientationType}} enum.
+      </p>
+      <p>
+        The following is defined in [[MEDIAQ]]:
+        <dfn data-cite="MEDIAQ#mq-boolean-context">Evaluating Media Features in a Boolean Context</dfn>.
       </p>
       <p>
         The following concepts and interfaces are defined in [[HTML]]:
