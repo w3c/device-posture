@@ -123,7 +123,7 @@
          or horizontal way.    
       </p>
       <span class="centered">
-        <img src="images/form-factors.svg" height="150px" alt="drawing of different type of foldable devices">
+        <img src="images/form-factors.svg" height="150" alt="drawing of different type of foldable devices">
       </span>
       <p>
         From enhancing the usability of a website by avoiding the area of a fold, to enabling innovative use cases for the 
@@ -242,8 +242,8 @@
       </p>
     </section>
     <section data-link-for="ScreenFoldPosture">
-      <h3>Screen Fold Media Queries</h3>
-      <h4>
+      <h2>Screen Fold Media Queries</h2>
+      <h3>
         The <code>'screen-fold-posture'</code> media feature
       </h3>
       <p>
@@ -344,7 +344,7 @@
         values are derived depending on the orientation of the fold:
       </p>
       <h4>Horizontal Fold</h4>
-      <span class="postures">
+      <div class="postures">
         <img src="images/horizontal-fold.svg" class="drawing" alt="drawing of a device with a vertical fold">
         <p>
           Devices with a horizontal fold are the ones for which in their 
@@ -352,7 +352,7 @@
         the screen(s).
         </p>
         
-      </span>
+      </div>
         <table class="simple">
         <caption>
           The posture values table for devices with a horizontal fold
@@ -429,13 +429,13 @@
         </tbody>
       </table>
       <h4>Vertical Fold</h4>
-      <span class="postures">
+      <div class="postures">
         <img src="images/vertical-fold.svg" class="drawing" alt="drawing of a device with a horizontal fold">
         <p>
           Devices with a vertical fold are the ones for which in their main form 
           factor, the folding occurs from top to bottom, across the screen(s).
         </p>
-      </span>
+      </div>
       <table class="simple">
         <caption>
           The posture values table for devices with a vertical fold
@@ -621,6 +621,7 @@
       </h2>
       <p>
         The Screen Fold API exposes two kinds of information:
+      </p>
         <ol class="algorithm">
           <li>
             an <a href="#the-angle-attribute-get-current-screen-fold-angle">angle</a> value
@@ -630,7 +631,6 @@
             A <a>posture</a> determined from the angle value
           </li>
         </ol>
-      </p>
       <p>
         Typical sensor readings are sent at a constant frequency to whomever is listening to its readings.
         However the fold angle only communicates its value when the hinge is manipulated by the user.
