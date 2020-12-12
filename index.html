@@ -204,34 +204,34 @@
         <dfn data-export="">posture</dfn> values:
       </p>
       <ol class="postures">
-        <img src="images/nofold-mode-graphic.svg" class="drawing" alt="drawing of no-fold mode">
         <li>
+          <img src="images/nofold-mode-graphic.svg" class="drawing" alt="drawing of no-fold mode">
           <a>No-Fold</a> is the posture of a device without a hinge. 
           This is the expected value for devices that do not fold.
         </li>
-        <img src="images/laptop-mode-graphic.svg" class="drawing" alt="drawing of laptop mode">
         <li>
+          <img src="images/laptop-mode-graphic.svg" class="drawing" alt="drawing of laptop mode">
           <a>Laptop</a> posture indicates that the device is being used as
           a traditional laptop, meaning one screen is placed on a more or
           less horizontal surface with a screen angle between 180 to 0 degrees.
         </li>
-        <img src="images/flat-mode-graphic.svg" class="drawing" alt="drawing of flat mode">
         <li>
+          <img src="images/flat-mode-graphic.svg" class="drawing" alt="drawing of flat mode">
           <a>Flat</a> posture indicates that one screen is being placed on
           a more or less horizontal surface with a screen angle around 180 degrees.
         </li>
-        <img src="images/tent-mode-graphic.svg" class="drawing" alt="drawing of tent mode">
         <li>
+          <img src="images/tent-mode-graphic.svg" class="drawing" alt="drawing of tent mode">
           <a>Tent</a> posture indicates that the edges of both screens are placed
           on a horizontal surface but with an angle > 180 degrees.
         </li>        
-        <img src="images/tablet-mode-graphic.svg" class="drawing" alt="drawing of tablet mode">
         <li>
+          <img src="images/tablet-mode-graphic.svg" class="drawing" alt="drawing of tablet mode">
           <a>Tablet</a> posture is when the device can turn around on its hinge all the way to have
           the screen back to back. The angle is considered to be around 360 degrees.
         </li>
-        <img src="images/book-mode-graphic.svg" class="drawing" alt="drawing of book mode">
         <li>
+          <img src="images/book-mode-graphic.svg" class="drawing" alt="drawing of book mode">
           <a>Book</a> posture is when the device is used between around 50 and 160 degrees. 
           It is generally used while being held on (not on a surface).
         </li>
@@ -339,7 +339,7 @@
 
         <p>Some devices might also lack one or more of the postures due to physical constraints or device design, in which case the device SHOULD make sure that all combinations of angles and device orientation (which can be locked by [[SCREEN-ORIENTATION]] and host OS) maps into one of the defined postures.</p>
       <p>
-        <img src="images/angle-graphic.svg">
+        <img src="images/angle-graphic.svg" alt="An illustration on how posture values are derived from the orientation of the fold">
         The <a>posture values table</a> shows how the {{posture}}
         values are derived depending on the orientation of the fold:
       </p>
@@ -788,7 +788,7 @@
         enable a hands-free when placed on a surface. The UA detects the posture and the UI is enhanced.
         Similar examples can be drafted for content to adapt to any posture. See the <a href="https://github.com/SamsungInternet/Explainers/blob/master/Foldables/FoldState.md#key-scenarios">explainer</a> for other key scenarios.
       </p>
-      <img src="images/example-videocall.svg" class="img-example" >
+      <img src="images/example-videocall.svg" alt="An illustration of a video call web service that uses the screen-fold-posture media feature" class="img-example" >
       <pre class="example css" title="Adapting UI to posture">
         @media (screen-fold-posture: laptop) and (spanning: single-fold-horizontal){
           body {
