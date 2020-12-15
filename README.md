@@ -1,4 +1,4 @@
-!['Screen Fold API logo'](https://raw.githubusercontent.com/w3c/screen-fold/master/images/sf-logo-s.png)
+!['Screen Fold API logo'](https://raw.githubusercontent.com/w3c/screen-fold/gh-pages/images/sf-logo-s.png)
 
 # Screen Fold API
 
@@ -7,7 +7,7 @@
 * [Kenneth Rohde Christiansen](https://twitter.com/kennethrohde) ([Intel](https://intel.com))
 
 ## Explainer
-* [Explainer on GitHub](https://github.com/SamsungInternet/Explainers/blob/master/Foldables/FoldState.md)
+* [Explainer on GitHub](https://github.com/SamsungInternet/Explainers/blob/gh-pages/Foldables/FoldState.md)
 
 ## Abstract
 
@@ -90,4 +90,4 @@ Many thanks for valuable feedback and advice from:
 * [Jo Balletti](https://twitter.com/thisisjofrank), [Ably Realtime](https://ably.io)
 * [Michael Blix](https://twitter.com/mkeblx), [Samsung](https://samsunginter.net) 
 
-!['drawing of different postures'](https://github.com/w3c/screen-fold/blob/master/images/postures.png?raw=true)
+!['drawing of different postures'](https://github.com/w3c/screen-fold/blob/gh-pages/images/postures.png?raw=true)
