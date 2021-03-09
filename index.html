@@ -89,10 +89,8 @@
   <body data-cite="FEATURE-POLICY PERMISSIONS CSSOM-VIEW SCREEN-ORIENTATION">
     <section id='abstract'>
       <p>
-        This document specifies an API that allows web applications to request the
-        angular value to which a device with a screen hinge is folded. Under the
-        right conditions, and if allowed, the value representing the angle in
-        degrees is returned.
+        This document specifies an API that allows web applications to request
+        and be notified of changes of the posture of a foldable device.
       </p>
     </section>
     <section id='sotd'>
@@ -112,29 +110,26 @@
       </h2>
       <p>
         New types of mobile devices are appearing that have some sort of folding capabilities around the screen. Hence, 
-        when the device folds, it physically forms an angle. The main interest in knowing the fold angle is because there
-         are opportunities in responsive design that enable new user experiences.
+        when the device folds, it physically can be different form factor. The main interest in knowing the posture is to 
+        enable new user experiences with responsive design.
       </p>
       <p>Among the described "folding" devices, there are mainly two different physical form factors: devices with a single
          flexible screen (seamless), and devices with two screens (with seam). They can both fold around a hinge, and the 
          current specification applies to both types. It should be clarified as well that both seamless and (devices) with seam
          can be of different dimension ranging from mobile and tablets to laptop sizes. It should also be noted that different
          devices will have different default orientations (portrait or landscape), and that the fold might happen in a vertical
-         or horizontal way.    
+         or horizontal way.
       </p>
       <span class="centered">
         <img src="images/form-factors.svg" height="150" alt="drawing of different type of foldable devices">
       </span>
       <p>
         From enhancing the usability of a website by avoiding the area of a fold, to enabling innovative use cases for the 
-        web, knowing the fold angle can help developers tailor their content to different devices. It can also enable to 
-        detect different postures the device might be in.
+        web, knowing the posture can help developers tailor their content to different devices.
       </p>
       <p>
-        Content can be consumed and browsed even when the device is not flat, in which case the developer might want to
-         provide a different layout for it depending on the state of the angle of the fold. Additionally, developers can 
-         adapt content depending on various “postures” and potentially also animate some of these transitions. You can 
-         refer to a description of use cases.
+        Content can be consumed and browsed even when the device is not flat, in which case the developer might want to 
+        provide a different layout for it depending on the posture state in which the device is being used.
       </p>
     </section>
     <section data-dfn-for="Screen">
@@ -159,7 +154,6 @@
       <pre class="idl">
         [SecureContext, Exposed=(Window)]
         interface ScreenFold : EventTarget {
-          readonly attribute unsigned short angle;
           readonly attribute ScreenFoldPosture posture;
           attribute EventHandler onchange;
         };
@@ -174,21 +168,14 @@
         };
       </pre>
       <section>
-        <h3>The <dfn>angle</dfn> attribute: Get current screen fold angle</h3>
+        <h3>The <dfn>posture</dfn> attribute: Get current device posture</h3>
         <p>
           When getting the type attribute, the user agent MUST return the
-          [=environment settings object/responsible document=]'s current screen fold angle.
+          [=environment settings object/responsible document=]'s current device {{posture}}.
         </p>
       </section>
       <section>
-        <h3>The <dfn>posture</dfn> attribute: Get current screen fold posture</h3>
-        <p>
-          When getting the type attribute, the user agent MUST return the
-          [=environment settings object/responsible document=]'s current screen fold {{posture}}.
-        </p>
-      </section>
-      <section>
-        <h3>The <dfn>onchange</dfn> attribute: Handle angle/posture changes</h3>
+        <h3>The <dfn>onchange</dfn> attribute: Handle posture changes</h3>
         <p data-link-for="ScreenFold">
           The {{onchange}} attribute is an <a data-cite="html">event handler</a> whose corresponding
           <a data-cite="html">event handler event type</a> is "<code>change</code>".
@@ -224,7 +211,7 @@
           <img src="images/tent-mode-graphic.svg" class="drawing" alt="drawing of tent mode">
           <a>Tent</a> posture indicates that the edges of both screens are placed
           on a horizontal surface but with an angle > 180 degrees.
-        </li>        
+        </li>
         <li>
           <img src="images/tablet-mode-graphic.svg" class="drawing" alt="drawing of tablet mode">
           <a>Tablet</a> posture is when the device can turn around on its hinge all the way to have
@@ -278,51 +265,13 @@
         A user agent MUST reflect the applied <a>posture</a> of the web
         application via a CSS media query [[MEDIAQ]].
       </p>
-      
-      <h3>
-        The <code>'screen-fold-angle'</code> media feature
-      </h3>
-      <p>
-        The <code><dfn>screen-fold-angle</dfn></code> media feature represents,
-        via a CSS media query [[MEDIAQ]], the <a class="production css" href="https://drafts.csswg.org/css-values-3/#angle-value">&lt;angle&gt;</a> of the device.
-        This media feature applies to the top-level browsing
-        context and any child browsing contexts. Child browsing contexts
-        reflect the <a class="production css" href="https://drafts.csswg.org/css-values-3/#angle-value">&lt;angle&gt;</a> of the <a>top-level browsing
-        context</a>.
-      </p>
-      <dl>
-        <dt>
-          Value:
-        </dt>
-        <dd>
-          <a class="production css" href="https://drafts.csswg.org/css-values-3/#angle-value">&lt;angle&gt;</a>  
-        </dd>
-        <dt>
-          Applies to:
-        </dt>
-        <dd>
-          visual media types
-        </dd>
-        <dt>
-          Accepts min/max prefixes:
-        </dt>
-        <dd>
-          Yes
-        </dd>
-      </dl>
-      <p>
-        A user agent MUST reflect the applied <a class="production css" href="https://drafts.csswg.org/css-values-3/#angle-value">&lt;angle&gt;</a> of the web
-        application via a CSS media query [[MEDIAQ]].
-      </p>
     </section>
-    
     <section>
       <h2>
         Reading the posture
       </h2>
       <p>
-        All <a>documents</a> have a <dfn>current screen fold angle</dfn> and a
-        <dfn>current posture</dfn>. Both of them SHOULD be
+        All <a>documents</a> have a <dfn>current posture</dfn>. Both of them SHOULD be
         initialized when the <a>document</a> is created, otherwise they MUST
         be initialized the first time they are accessed and before their
         value is read. The <a>user agent</a> MUST <a>update the screen fold
@@ -330,7 +279,7 @@
       </p>
       <p>
         For a given <a>document</a>, the <a>current posture</a>
-        is derived from the <a>current screen fold angle</a> and the <a>
+        is derived from the current hinge angle and the <a>
         current screen orientation</a>.
       </p>
       <p><i>These tables are non-normative.</i></p>
@@ -351,7 +300,6 @@
         main form factor, the folding occurs from side to side, across 
         the screen(s).
         </p>
-        
       </div>
         <table class="simple">
         <caption>
@@ -366,7 +314,7 @@
               <a>Current screen orientation</a>
             </th>
             <th>
-              <a>Current screen fold angle</a>
+              Current hinge angle value
             </th>
           </tr>
         </thead>
@@ -449,7 +397,7 @@
               <a>Current screen orientation</a>
             </th>
             <th>
-              <a>Current screen fold angle</a>
+              Current hinge angle value
             </th>
           </tr>
         </thead>
@@ -526,13 +474,7 @@
         </p>
         <ol class="algorithm">
           <li>
-            Set the <a>document</a>'s <a>current screen fold angle</a> to the 
-            angle between the screen fold in degrees (or two screens in
-            case of a dual screen device).
-          </li>
-          <li>
-            Update the <a>document</a>'s <a>current posture</a> given
-            the <a>current screen fold angle</a> and <a>current screen orientation</a>,
+            Update the <a>document</a>'s <a>current posture</a> and <a>current screen orientation</a>,
             according to <a>posture values table</a>.
           </li>
         </ol>
@@ -581,15 +523,14 @@
             Let |document| be the <a>document</a> in question.
           </li>
           <li>
-            Let |posture| and |angle| be respectively the |document|'s <a>
-            current posture</a> and <a>current screen fold angle</a>.
+            Let |posture| be the |document|'s <a>
+            current posture</a>.
           </li>
           <li>
             <a>Update the screen fold information</a> of the |document|.
           </li>
           <li>If |posture| is different from the |document|'s <a>current
-          posture</a> or |angle| from the |document|'s <a>current screen
-          fold angle</a>, run the following sub-steps:
+          posture</a>, run the following sub-steps:
             <ol>
               <li>
                 <a>Fire an event</a> named `change` at the |document|'s
@@ -620,17 +561,8 @@
         Security and Privacy considerations
       </h2>
       <p>
-        The Screen Fold API exposes two kinds of information:
+        The Screen Fold API exposes a <a>posture</a> determined from the hinge angle value and other sensors.
       </p>
-        <ol class="algorithm">
-          <li>
-            an <a href="#the-angle-attribute-get-current-screen-fold-angle">angle</a> value
-            representing the hinge position
-          </li>
-          <li>
-            A <a>posture</a> determined from the angle value
-          </li>
-        </ol>
       <p>
         Typical sensor readings are sent at a constant frequency to whomever is listening to its readings.
         However the fold angle only communicates its value when the hinge is manipulated by the user.
@@ -640,15 +572,8 @@
         the angle, so the fold angle value is changing in bursts: the events may be dispatched at a very low
         frequency most of the time and fire at a high frequency when the device is being opened or closed.
         In order for the events to be dispatched, the content must be on the foreground and visible to the
-        user.
-      </p>
-      <p>
-        Minimizing the accuracy of the angle readout generally decreases the risk of fingerprinting.
-        User agents should not provide unnecessarily verbose readouts of the hinge angle data.
-        Posture values are not very useful values to fingerprint a user. They’re similar in concept
-        with the orientation values. The posture change is only triggered in certain fold angle values
-        providing a very low resolution reading. Because the changes are very sparse changes with very
-        few predefined values, it makes it hard to precisely identify users across sites.
+        user.Because the API does not directly expose the raw angle values, but a more abstract posture with fewer possible states, 
+        fingerprinting possibilities are limited.
       </p>
       <p>
         If the same code using the API can be used simultaneously in different window contexts on the same
@@ -662,17 +587,6 @@
         <p>
           <i>This section is non-normative.</i>
         </p>
-        <section>
-        <h4>
-          Device Fingerprinting
-        </h4>
-        <p>
-          Sensors can provide information that can uniquely identify the device using those sensors.
-          Every concrete sensor model has minor manufacturing imperfections and differences that will be
-          unique for this model. These manufacturing variations and imperfections can be used to
-          fingerprint the device.
-        </p>
-        </section>
       </section>
       <section>
         <h3>Mitigation Strategies</h3>
@@ -688,7 +602,7 @@
             Secure Context
           </h4>
           <p>
-            Posture value and fold angle readings are explicitly flagged by the Secure Contexts specification as a
+            Posture value readings are explicitly flagged by the Secure Contexts specification as a
             high-value target for network attackers. Thus all interfaces defined by this specification or extension
             specifications are only available within a secure context.
           </p>
@@ -698,7 +612,7 @@
             Focused Area
           </h4>
           <p>
-            Posture value and fold angle readings are only available for active documents whose origin is the
+            Posture value readings are only available for active documents whose origin is the
             same origin-domain with the currently focused area document.
           </p>
           <p>
@@ -712,60 +626,8 @@
             Visibility State
           </h4>
           <p>
-            Posture value and fold angle readings are only available for the active documents
+            Posture value readings are only available for the active documents
             whose visibility state is "visible".
-          </p>
-        </section>
-      </section>
-      <section>
-        <h3>Mitigation strategies applied on a case by case basis</h3>
-        <section>
-          <h4>
-            Limit maximum sampling frequency
-          </h4>
-          <p>
-            User agents may mitigate certain threats by limiting the maximum sampling frequency.
-            Coalescing and aligning the fold angle readings with the animation frame would limit
-            the fingerprinting while still allowing animations responding to the fold angle. Limiting
-            the maximum sampling frequency prevents use cases which rely on low latency or high
-            data density.
-          </p>
-        </section>
-        <section>
-          <h4>
-            Limit number of delivered readings
-          </h4>
-          <p>
-            An alternative to limiting the maximum sampling frequency is to limit the number of sensor
-            readings delivered to Web application developers, regardless of what frequency the sensor
-            is polled at. This allows use cases which have low latency requirements to increase sampling
-            frequency without increasing the amount of data provided. Discarding intermediary readings
-            prevents certain use cases, such as those relying on certain kinds of filters.
-            User agent should wait before sending the angle value changes after a minimum of degrees
-            changes to remove the noise as well as to avoid getting events while the user is just
-            interacting with the screen. This would limit identifying users with shaky hands.
-          </p>
-        </section>
-        <section>
-          <h4>
-            Reduce accuracy
-          </h4>
-          <p>
-            Lowering the resolution of the angle MAY lead to reducing the uniqueness
-            that the value can have. Nonetheless, if several sites are being displayed
-            on the same device, it can be easy to identify that it is the same user,
-            even if the value is rounded. As a solution, applying some fuzziness to
-            the value itself MAY work.
-          </p>
-        </section>
-        <section>
-          <h3>
-            Applying fuzziness to the angle value
-          </h3>
-          <p>
-            Lowering the resolution of the returned value may not be enough, so fuzzing
-            out the value can algo help, in order to report different values. This fuzzy
-            offset can help differentiate returned values, minimizing the risk of fingerprinting.
           </p>
         </section>
       </section>
@@ -775,14 +637,13 @@
         Examples
       </h2>
       <h3>Example 1: screen.fold data</h3>
-      <p>This is a simple use case of the <a>posture</a> and <a href="#the-angle-attribute-get-current-screen-fold-angle">angle</a> value being printed on the console. </p>
+      <p>This is a simple use case of the <a>posture</a> being printed on the console. </p>
       <pre class="example js" title="React to poster change">
           screen.fold.addEventListener("change", () => {
-            const { angle, posture } = screen.fold;
-            console.log(`The current screen angle is ${angle}, which means it is in ${posture} posture!`);
+            const { posture } = screen.fold;
+            console.log(`The current posture is: ${posture}!`);
           })
       </pre>
-      
       <h3>Example 2: screen-fold-posture</h3>
       <p>The device is being used for a video call web service. It can be folded into the laptop <a>posture</a> to
         enable a hands-free when placed on a surface. The UA detects the posture and the UI is enhanced.
@@ -801,52 +662,7 @@
           }
         }
       </pre>
-
-      <h3>Example 3: screen-fold-angle</h3>
-      <p>
-        Some scenarios might span outside of the default <a>postures</a> envisioned in this document.
-        The screen-fold-angle media feature allows to define a range or threshold for the layout to 
-        change. 
-      </p>
-      <p>As an example, an experience that might require a separate viewing area by user (like a game)
-        might find that the default 185° starting angle for the tent posture is too "open" to guarantee
-        one user will not see the other user's screen. Using screen-fold-angle the threshold can be 
-        defined by the developer.</p>
-        <img src="images/example-screen-fold-angle.svg" alt="diagram of an example that uses an angle range to tailor content">
-        <pre class="example css" title="Defining angle ranges for content">
-          @media (min-screen-fold-angle: 270deg) {
-            /*enable custom layout for the app*/ 
-          }
-
-        </pre>
-
-      <h3>Example 4 &amp; 5: Animation</h3>
-      <p>
-        Opening and closing a device might include animations linked to the value of the angle of the fold.
-        This allows the creation of content that can mimic the effect of a pop-up book.  
-      </p>
-      <p>Another example can be mapping the state of the fold of a device to transformations of a DOM element.
-        With this approach you could rotate an element based on the value of the angle.</p>
-        <img src="images/exampler-animation.svg" alt="diagram of an img element rotating on the center of a webpage">
-        <pre class="example js" title="Element animation based on fold value (JS)">
-          let fish = document.querySelector('.fish-circle');
-          
-          ScreenFold.addEventListener('change', function(e) {
-            //animation keyframes
-            let rotationFish = [
-              {transform: `rotate(${e.angle})`, easing: 'ease-out'}
-            ];
-
-            fish.animate(rotationFish, 100);
-          };
-        </pre>
-        <pre class="example css" title="Element animation based on fold value (CSS)">
-          .fish-circle {
-            transform: rotate(env(screen-fold-angle));
-          }
-        </pre>
-
-        <h3>Example 6: Feature detection of screen-fold-posture media feature</h3>
+        <h3>Example 3: Feature detection of screen-fold-posture media feature</h3>
         <p>
           As one of the valid screen-fold-posture values will always be true, you can use the following
           snippet to detect whether a user agent supports the media feature:
