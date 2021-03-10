@@ -1,6 +1,6 @@
-!['Screen Fold API logo'](https://raw.githubusercontent.com/w3c/screen-fold/gh-pages/images/sf-logo-s.png)
+!['Device Posture API logo'](https://raw.githubusercontent.com/w3c/device-posture/gh-pages/images/sf-logo-s.png)
 
-# Screen Fold API
+# Device Posture API
 
 ## Authors
 * [Diego González-Zúñiga](https://twitter.com/diekus) ([Samsung](https://samsunginter.net))
