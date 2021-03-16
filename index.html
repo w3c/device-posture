@@ -149,10 +149,17 @@
     </section>
     <section data-dfn-for="DevicePosture">
       <h2>
-        The <dfn>DevicePosture</dfn> attribute
+        The <dfn>DevicePosture</dfn> interface
       </h2>
       <pre class="idl">
-        enum DevicePosture {
+
+        [SecureContext, Exposed=(Window)]
+        interface DevicePosture : EventTarget {
+          readonly attribute DevicePostureType type;
+          attribute EventHandler onchange;
+        };
+
+        enum DevicePostureType {
           "no-fold",
           "laptop",
           "flat",
@@ -161,10 +168,13 @@
           "book"
         };
       </pre>
-      <p>
-        When getting the type attribute, the user agent MUST return the
-        [=environment settings object/responsible document=]'s current device {{posture}}.
-      </p>
+      <section>
+        <h3>The <dfn>type</dfn> attribute: Get current device posture</h3>
+        <p>
+          When getting the type attribute, the user agent MUST return the
+          [=environment settings object/responsible document=]'s current {{posture}}.
+        </p>
+      </section>
       <section>
         <h3>The <dfn>onchange</dfn> attribute: Handle posture changes</h3>
         <p data-link-for="DevicePosture">
@@ -173,7 +183,7 @@
         </p>
       </section>
     </section>
-    <section data-link-for="DevicePosture">
+    <section data-link-for="DevicePostureType">
       <h2>
         Posture modes
       </h2>
@@ -219,7 +229,7 @@
         {{DevicePosture}} enum values.
       </p>
     </section>
-    <section data-link-for="DevicePosture">
+    <section data-link-for="DevicePostureType">
       <h2>Device Posture Media Queries</h2>
       <h3>
         The <code>'device-posture'</code> media feature
@@ -311,7 +321,7 @@
         </thead>
         <tbody>
           <tr>
-            <td data-link-for="DevicePosture">
+            <td data-link-for="DevicePostureType">
               <a>Laptop</a>
             </td>
             <td>
@@ -322,7 +332,7 @@
             </td>
           </tr>
           <tr>
-            <td data-link-for="DevicePosture">
+            <td data-link-for="DevicePostureType">
               <a>Flat</a>
             </td>
             <td>
@@ -333,7 +343,7 @@
             </td>
           </tr>
           <tr>
-            <td data-link-for="DevicePosture">
+            <td data-link-for="DevicePostureType">
               <a>Tent</a>
             </td>
             <td>
@@ -344,7 +354,7 @@
             </td>
           </tr>
           <tr>
-            <td data-link-for="DevicePosture">
+            <td data-link-for="DevicePostureType">
               <a>Tablet</a>
             </td>
             <td>
@@ -355,7 +365,7 @@
             </td>
           </tr>
           <tr>
-            <td data-link-for="DevicePosture">
+            <td data-link-for="DevicePostureType">
               <a>Book</a>
             </td>
             <td>
@@ -394,7 +404,7 @@
         </thead>
         <tbody>
           <tr>
-            <td data-link-for="DevicePosture">
+            <td data-link-for="DevicePostureType">
               <a>Laptop</a>
             </td>
             <td>
@@ -405,7 +415,7 @@
             </td>
           </tr>
           <tr>
-            <td data-link-for="DevicePosture">
+            <td data-link-for="DevicePostureType">
               <a>Flat</a>
             </td>
             <td>
@@ -416,7 +426,7 @@
             </td>
           </tr>
           <tr>
-            <td data-link-for="DevicePosture">
+            <td data-link-for="DevicePostureType">
               <a>Tent</a>
             </td>
             <td>
@@ -427,7 +437,7 @@
             </td>
           </tr>
           <tr>
-            <td data-link-for="DevicePosture">
+            <td data-link-for="DevicePostureType">
               <a>Tablet</a>
             </td>
             <td>
@@ -438,7 +448,7 @@
             </td>
           </tr>
           <tr>
-            <td data-link-for="DevicePosture">
+            <td data-link-for="DevicePostureType">
               <a>Book</a>
             </td>
             <td>
@@ -631,7 +641,7 @@
       <p>This is a simple use case of the <a>posture</a> being printed on the console. </p>
       <pre class="example js" title="React to poster change">
           screen.posture.addEventListener("change", () => {
-            console.log(`The current posture is: ${screen.posture}!`);
+            console.log(`The current posture is: ${screen.posture.type}!`);
           })
       </pre>
       <h3>Example 2: device-posture</h3>
