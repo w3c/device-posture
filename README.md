@@ -17,7 +17,7 @@
 
 Foldable devices come in many shapes and sizes. While the use cases for the ultrabooks of the past vary significantly from those of the new trend of mobile devices due to the inherent focus on screen real estate, **the data in question is similar since it’s related to the angle of the fold**.
 
-The **main interest in knowing the device posture is because there are interesting opportunities in the area of responsive design that enable new user experiences**. With these new devices, the user can choose to consume content and browse the web even when the device is not flat, in which case the developer might want to provide a different layout for the content depending on how the device is being used. We propose a way to expose information about the posture of the device to the developer.
+The device posture is the physical position in which a device holds which may be derived from sensors in addition to the angle. The **main interest in knowing the device posture is because there are interesting opportunities in the area of responsive design that enable new user experiences**. With these new devices, the user can choose to consume content and browse the web even when the device is not flat, in which case the developer might want to provide a different layout for the content depending on how the device is being used. We propose a way to expose information about the posture of the device to the developer.
 
 ## Proposals
 ### New CSS media query: `device-posture`
