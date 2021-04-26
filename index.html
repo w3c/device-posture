@@ -132,18 +132,18 @@
         provide a different layout for it depending on the posture state in which the device is being used.
       </p>
     </section>
-    <section data-dfn-for="Screen">
+    <section data-dfn-for="Navigator">
       <h2>
-        Extensions to the `Screen` interface
+        Extensions to the `Navigator` interface
       </h2>
       <p>
-        The [[cssom-view]] specification defines the <dfn>Screen</dfn> interface,
+        The [[HTML]] specification defines the <dfn>Navigator</dfn> interface,
         which this specification extends:
       </p>
       <pre class="idl">
-        [SecureContext]
-        partial interface Screen {
-          [SameObject] readonly attribute DevicePosture posture;
+        [SecureContext, Exposed=(Window)]
+        partial interface Navigator {
+          [SameObject] readonly attribute DevicePosture devicePosture;
         };
       </pre>
     </section>
@@ -508,7 +508,7 @@
               </li>
               <li>
                 <a>Fire an event</a> named `change` at |document|'s
-                {{Screen.posture}} object.
+                {{Window.navigator.devicePosture}} object.
               </li>
             </ol>
           </li>
@@ -535,14 +535,14 @@
             <ol>
               <li>
                 <a>Fire an event</a> named `change` at the |document|'s
-                {{Screen.posture}} object.
+                {{Window.navigator.devicePosture}} object.
               </li>
             </ol>
           </li>
         </ol>
         <div class="note">
           <p>
-            Developers need to be aware that a {{Screen.posture}} object
+            Developers need to be aware that a {{Window.navigator.devicePosture}} object
             from a <a>document</a> that is not visible, as per
             [[PAGE-VISIBILITY]], will not receive an orientation change event.
             This is to prevent unnecessary changes to layout, etc. in the
@@ -640,8 +640,8 @@
       <h3>Example 1: Posture data</h3>
       <p>This is a simple use case of the <a>posture</a> being printed on the console. </p>
       <pre class="example js" title="React to poster change">
-          screen.posture.addEventListener("change", () => {
-            console.log(`The current posture is: ${screen.posture.type}!`);
+          navigator.devicePosture.addEventListener("change", () => {
+            console.log(`The current posture is: ${navigator.devicePosture.type}!`);
           })
       </pre>
       <h3>Example 2: device-posture</h3>

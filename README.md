@@ -40,9 +40,9 @@ Among the values that the device-posture query can take are:
 /*for a monitor scenario*/
 @media (device-posture: flat) and (orientation: portrait) { ... }
 ```
-### New JS object in `window.screen`: `posture`
+### New JS object in `window.navigator`: `devicePosture`
 
-The Window property screen returns a reference to the screen object associated with the window. It already houses a similar property [`orientation`](https://developer.mozilla.org/en-US/docs/Web/API/ScreenOrientation) that itself has a value for an [angle](https://w3c.github.io/screen-orientation/#idl-index).
+The Navigator property of Window [navigator](https://html.spec.whatwg.org/multipage/system-state.html#the-navigator-object) should host device capabilities and system states.
 
 #### Proposed Object
 ```javascript
