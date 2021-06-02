@@ -281,13 +281,20 @@
       <p>
         For a given <a>document</a>, the <a>current posture</a>
         is derived from the current hinge angle and the <a>
-        current screen orientation</a>.
+        current screen orientation</a>, and potentially other (device specific) signals.
       </p>
       <p><i>These tables are non-normative.</i></p>
       <h3><dfn>Posture values table</dfn></h3>
-      <p>The values are approximations and might differ per device. For instance, a device might not yield exactly 180° when laying flat, but instead values ranging from 175° to 185°. Device makers SHOULD make sure that the physical device postures map correctly to the postures defined by this specification.</p>
-
-        <p>Some devices might also lack one or more of the postures due to physical constraints or device design, in which case the device SHOULD make sure that all combinations of angles and device orientation (which can be locked by [[SCREEN-ORIENTATION]] and host OS) maps into one of the defined postures.</p>
+      <p>
+        The values are approximations and might differ per device. For instance, a device
+        might not yield exactly 180° when laying flat, but instead values ranging from 175°
+        to 185°. Device makers SHOULD make sure that the physical device postures map correctly
+        to the postures defined by this specification.
+      </p>
+      <p>Some devices might also lack one or more of the postures due to physical constraints
+        or device design, in which case the device SHOULD make sure that all combinations of
+        angles and device orientation (which can be locked by [[SCREEN-ORIENTATION]] and host OS),
+        as well as device specific signals, maps into one of the defined postures.</p>
       <p>
         <img src="images/angle-graphic.svg" alt="An illustration on how posture values are derived from the orientation of the fold">
         The <a>posture values table</a> shows how the {{posture}}
@@ -485,8 +492,9 @@
           Device Posture change
         </h2>
         <p>
-          Whenever the screen(s) fold angle changes, the <a>user agent</a> MUST run
-          the following steps as part of the next <a>animation frame task</a>:
+          Whenever the screen(s) fold angle, screen orientation or device specific signals
+          change, the <a>user agent</a> MUST runthe following steps as part of the next
+          <a>animation frame task</a>:
         </p>
         <ol class="algorithm">
           <li>
@@ -573,8 +581,8 @@
         the angle, so the fold angle value is changing in bursts: the events may be dispatched at a very low
         frequency most of the time and fire at a high frequency when the device is being opened or closed.
         In order for the events to be dispatched, the content must be on the foreground and visible to the
-        user.Because the API does not directly expose the raw angle values, but a more abstract posture with fewer possible states, 
-        fingerprinting possibilities are limited.
+        user. Because the API does not directly expose the raw angle values, but a more abstract posture
+        with fewer possible states, fingerprinting possibilities are more limited.
       </p>
       <p>
         If the same code using the API can be used simultaneously in different window contexts on the same
