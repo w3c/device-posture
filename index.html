@@ -132,6 +132,37 @@
         provide a different layout for it depending on the posture state in which the device is being used.
       </p>
     </section>
+    <section>
+      <h3>
+        Internal slots
+      </h3>
+      <p>
+        The following internal slots are added to the {{Document}} interface.
+      </p>
+      <table class="simple">
+        <thead>
+          <tr>
+            <th>
+              Internal slot
+            </th>
+            <th>
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <dfn>[[\CurrentPosture]]</dfn>
+            </td>
+            <td>
+              The <dfn>current posture</dfn>.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </section>
     <section data-dfn-for="Navigator">
       <h2>
         Extensions to the `Navigator` interface
@@ -171,8 +202,8 @@
       <section>
         <h3>The <dfn>type</dfn> attribute: Get current device posture</h3>
         <p>
-          When getting the type attribute, the user agent MUST return the
-          [=environment settings object/responsible document=]'s current {{posture}}.
+          When getting the type attribute, the user agent MUST return the value of
+          [=environment settings object/responsible document=]'s internal slot {{[[CurrentPosture]]}}.
         </p>
       </section>
       <section>
@@ -272,11 +303,11 @@
         Reading the posture
       </h2>
       <p>
-        All <a>documents</a> have a <dfn>current posture</dfn>. Both of them SHOULD be
+        All <a>documents</a> have an internal slot [[\CurrentPosture]], which should be
         initialized when the <a>document</a> is created, otherwise they MUST
         be initialized the first time they are accessed and before their
         value is read. The <a>user agent</a> MUST <a>update the device posture
-        information</a> of the <a>document</a> to initialize them.
+        information</a> of the <a>document</a> to initialize it.
       </p>
       <p>
         For a given <a>document</a>, the <a>current posture</a>
@@ -482,8 +513,9 @@
         </p>
         <ol class="algorithm">
           <li>
-            Update the <a>document</a>'s <a>current posture</a> and <a>current screen orientation</a>,
-            according to <a>posture values table</a>.
+            Update the <a>document</a>.{{[[CurrentPosture]]}} given current hinge angle value,
+            <a>current screen orientation</a>, as well as potential implementation-specific
+            signals, according to <a>posture values table</a>.
           </li>
         </ol>
       </section>
@@ -493,7 +525,7 @@
         </h2>
         <p>
           Whenever the screen(s) fold angle, screen orientation or device specific signals
-          change, the <a>user agent</a> MUST runthe following steps as part of the next
+          change, the <a>user agent</a> MUST run the following steps as part of the next
           <a>animation frame task</a>:
         </p>
         <ol class="algorithm">
@@ -532,14 +564,13 @@
             Let |document| be the <a>document</a> in question.
           </li>
           <li>
-            Let |posture| be the |document|'s <a>
-            current posture</a>.
+            Let |posture| be the |document|.{{[[CurrentPosture]]}}.
           </li>
           <li>
             <a>Update the device posture information</a> of the |document|.
           </li>
-          <li>If |posture| is different from the |document|'s <a>current
-          posture</a>, run the following sub-steps:
+          <li>If |posture| is different from the |document|.{{[[CurrentPosture]]}},
+            run the following sub-steps:
             <ol>
               <li>
                 <a>Fire an event</a> named `change` at the |document|'s
@@ -635,8 +666,10 @@
             Visibility State
           </h4>
           <p>
-            Posture value readings are only available for the active documents
-            whose visibility state is "visible".
+            Posture value change events are only fired for active documents
+            whose visibility state is "visible", and polling the value while that is not the case,
+            will return a stale value as the value is only updated while the visibility state is
+            "visible" or just changed to "visible".
           </p>
         </section>
       </section>
