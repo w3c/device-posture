@@ -153,7 +153,7 @@
         <tbody>
           <tr>
             <td>
-              <dfn>[[\CurrentPosture]]</dfn>
+              <dfn data-dfn-for="Document">[[\CurrentPosture]]</dfn>
             </td>
             <td>
               The <dfn>current posture</dfn>.
@@ -203,7 +203,7 @@
         <h3>The <dfn>type</dfn> attribute: Get current device posture</h3>
         <p>
           When getting the type attribute, the user agent MUST return the value of
-          [=environment settings object/responsible document=]'s internal slot {{[[CurrentPosture]]}}.
+          [=environment settings object/responsible document=]'s internal slot {{Document/[[CurrentPosture]]}}.
         </p>
       </section>
       <section>
@@ -303,7 +303,7 @@
         Reading the posture
       </h2>
       <p>
-        All <a>documents</a> have an internal slot [[\CurrentPosture]], which should be
+        Every instance of {{Document}} has an internal slot {{Document/[[CurrentPosture]]}}, which should be
         initialized when the <a>document</a> is created, otherwise they MUST
         be initialized the first time they are accessed and before their
         value is read. The <a>user agent</a> MUST <a>update the device posture
@@ -513,7 +513,7 @@
         </p>
         <ol class="algorithm">
           <li>
-            Update the <a>document</a>.{{[[CurrentPosture]]}} given current hinge angle value,
+            Update the <a>document</a>.{{Document/[[CurrentPosture]]}} given current hinge angle value,
             <a>current screen orientation</a>, as well as potential implementation-specific
             signals, according to <a>posture values table</a>.
           </li>
@@ -564,12 +564,12 @@
             Let |document| be the <a>document</a> in question.
           </li>
           <li>
-            Let |posture| be the |document|.{{[[CurrentPosture]]}}.
+            Let |posture| be the |document|.{{Document/[[CurrentPosture]]}}.
           </li>
           <li>
             <a>Update the device posture information</a> of the |document|.
           </li>
-          <li>If |posture| is different from the |document|.{{[[CurrentPosture]]}},
+          <li>If |posture| is different from the |document|.{{Document/[[CurrentPosture]]}},
             run the following sub-steps:
             <ol>
               <li>
