@@ -63,11 +63,12 @@
     </script>
     <style>
       :root {
-        --drawing-size: 10rem;
+        --drawing-size: 15rem;
       }
 
       .drawing {
-        width: var(--drawing-size);
+        height: var(--drawing-size);
+        margin-bottom: 1em;
         object-fit: contain;
       }
 
@@ -207,12 +208,9 @@
         };
 
         enum DevicePostureType {
-          "no-fold",
-          "laptop",
-          "flat",
-          "tent",
-          "tablet",
-          "book"
+          "continuous",
+          "folded",
+          "folded-over"          
         };
       </pre>
       <section>
@@ -240,35 +238,37 @@
       </p>
       <ol class="postures">
         <li>
-          <img src="images/nofold-mode-graphic.svg" class="drawing" alt="drawing of no-fold mode">
-          <a>No-Fold</a> is the posture of a device without a hinge. 
-          This is the expected value for devices that do not fold.
+          <img src="images/continuos-posture.svg" class="drawing" alt="drawing of the continuous posture">
+          <p><a>Continuous</a> posture: The continuous posture refers to a "flat" position. This is the default case.</p>
+          <p>It includes devices with no folds, hinges or similar capabilities.</p>
+          <p>Due to the nature of hardware, it also includes devices with dual, foldable, rollable or curved screens, as long as they are in a posture where the document is expected to be displayed with a flat layout.</p>
+          <p>Examples of these are:</p>
+          <ul>
+            <li>Foldable device in a flat posture.</li>
+            <li>Foldable device running the browser in a window/section that does not span the hinge.</li>
+            <li>2-in-1 device in tablet mode using only 1 screen/side. </li>
+            <li>Devices that do not fold.</li>
+          </ul>
+          <div class="note">
+            <p>In some cases, devices can run several apps and be in a physical posture other than flat, but as long as the browser does not span through several screens/sections, the corresponding posture is continuous.</p>
+          </div>
         </li>
         <li>
-          <img src="images/laptop-mode-graphic.svg" class="drawing" alt="drawing of laptop mode">
-          <a>Laptop</a> posture indicates that the device is being used as
-          a traditional laptop, meaning one screen is placed on a more or
-          less horizontal surface with a screen angle between 180 to 0 degrees.
+          <img src="images/folded-posture.svg" class="drawing" alt="drawing of the folded posture">
+          <a>Folded</a> posture: The folded posture refers to devices that can physically fold. These devices can have one flexible screen or two adjacent screens. This posture forms an angle between the displays/sections that does not exceed a 'flat' position. 
+          <p>Examples of these are:</p>
+          <ul>
+            <li>Foldable device with a vertical hinge and internal screens being used in a 'book' posture, where the content spans through both sections and forms an angle between ~30° and ~170°.</li>
+            <li>Foldable device with a horizontal hinge and internal screens being used in a 'laptop' posture.</li>
+          </ul>
         </li>
         <li>
-          <img src="images/flat-mode-graphic.svg" class="drawing" alt="drawing of flat mode">
-          <a>Flat</a> posture indicates that one screen is being placed on
-          a more or less horizontal surface with a screen angle around 180 degrees.
-        </li>
-        <li>
-          <img src="images/tent-mode-graphic.svg" class="drawing" alt="drawing of tent mode">
-          <a>Tent</a> posture indicates that the edges of both screens are placed
-          on a horizontal surface but with an angle > 180 degrees.
-        </li>
-        <li>
-          <img src="images/tablet-mode-graphic.svg" class="drawing" alt="drawing of tablet mode">
-          <a>Tablet</a> posture is when the device can turn around on its hinge all the way to have
-          the screen back to back. The angle is considered to be around 360 degrees.
-        </li>
-        <li>
-          <img src="images/book-mode-graphic.svg" class="drawing" alt="drawing of book mode">
-          <a>Book</a> posture is when the device is used between around 50 and 160 degrees. 
-          It is generally used while being held on (not on a surface).
+          <img src="images/folded-over-posture.svg" class="drawing" alt="drawing of the folded over posture">
+          <a>Folded-over</a> posture: The folded-over posture is when the device is physically folded and the screens/sections surpass the ~200° angle. It is also known as the 'tent' posture when the device is being used with its hinge parallel to a surface.
+          <p>Examples of these are:</p>
+          <ul>
+            <li>2-in-1 device on a surface displaying content for users on each side of the device (games).</li>
+          </ul>
         </li>
       </ol>
       <p>
@@ -294,7 +294,7 @@
           Value:
         </dt>
         <dd>
-          <a>no-fold</a> | <a>laptop</a> | <a>flat</a> | <a>tent</a> | <a>tablet</a> | <a>book</a>
+          <a>continuous</a> | <a>folded</a> | <a>folded-over</a>
         </dd>
         <dt>
           Applies to:
@@ -343,177 +343,27 @@
         angles and device orientation (which can be locked by [[SCREEN-ORIENTATION]] and host OS),
         as well as device specific signals, maps into one of the defined postures.</p>
       <p>
-        <img src="images/angle-graphic.svg" alt="An illustration on how posture values are derived from the orientation of the fold">
-        The <a>posture values table</a> shows how the {{posture}}
-        values are derived depending on the orientation of the fold:
+
+      <h4>Foldables</h4>
+      <p>
+
       </p>
-      <h4>Horizontal Fold</h4>
-      <div class="postures">
-        <img src="images/horizontal-fold.svg" class="drawing" alt="drawing of a device with a vertical fold">
-        <p>
-          Devices with a horizontal fold are the ones for which in their 
-        main form factor, the folding occurs from side to side, across 
-        the screen(s).
-        </p>
-      </div>
-        <table class="simple">
-        <caption>
-          The posture values table for devices with a horizontal fold
-        </caption>
-        <thead>
-          <tr>
-            <th>
-              <a>Current posture</a>
-            </th>
-            <th>
-              <a>Current screen orientation</a>
-            </th>
-            <th>
-              Current hinge angle value
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-link-for="DevicePostureType">
-              <a>Laptop</a>
-            </td>
-            <td>
-              <i><a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-portrait-primary">"portrait-primary"</a> | <a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-portrait-secondary">"portrait-secondary"</a></i>
-            </td>
-            <td>
-              `[0° - 140°[`
-            </td>
-          </tr>
-          <tr>
-            <td data-link-for="DevicePostureType">
-              <a>Flat</a>
-            </td>
-            <td>
-              <i>any orientation</i>
-            </td>
-            <td>
-              `[140° - 185°[`
-            </td>
-          </tr>
-          <tr>
-            <td data-link-for="DevicePostureType">
-              <a>Tent</a>
-            </td>
-            <td>
-              <i>any orientation</i>
-            </td>
-            <td>
-              `[185° - 335°[`
-            </td>
-          </tr>
-          <tr>
-            <td data-link-for="DevicePostureType">
-              <a>Tablet</a>
-            </td>
-            <td>
-              <i>any orientation</i>
-            </td>
-            <td>
-              `[335° - 360°]`
-            </td>
-          </tr>
-          <tr>
-            <td data-link-for="DevicePostureType">
-              <a>Book</a>
-            </td>
-            <td>
-              <i><a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-landscape-primary">"landscape-primary"</a> | <a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-landscape-secondary">"landscape-secondary"</a></i>
-            </td>
-            <td>
-              `[0° - 140°[`
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <h4>Vertical Fold</h4>
-      <div class="postures">
-        <img src="images/vertical-fold.svg" class="drawing" alt="drawing of a device with a horizontal fold">
-        <p>
-          Devices with a vertical fold are the ones for which in their main form 
-          factor, the folding occurs from top to bottom, across the screen(s).
-        </p>
-      </div>
       <table class="simple">
-        <caption>
-          The posture values table for devices with a vertical fold
-        </caption>
-        <thead>
-          <tr>
-            <th>
-              <a>Current posture</a>
-            </th>
-            <th>
-              <a>Current screen orientation</a>
-            </th>
-            <th>
-              Current hinge angle value
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-link-for="DevicePostureType">
-              <a>Laptop</a>
-            </td>
-            <td>
-              <i><a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-landscape-primary">"landscape-primary"</a> | <a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-landscape-secondary">"landscape-secondary"</a></i>
-            </td>
-            <td>
-              `[0° - 140°[`
-            </td>
-          </tr>
-          <tr>
-            <td data-link-for="DevicePostureType">
-              <a>Flat</a>
-            </td>
-            <td>
-              <i>any orientation</i>
-            </td>
-            <td>
-              `[140° - 185°[` 
-            </td>
-          </tr>
-          <tr>
-            <td data-link-for="DevicePostureType">
-              <a>Tent</a>
-            </td>
-            <td>
-              <i>any orientation</i>
-            </td>
-            <td>
-              `[185° - 335°[`
-            </td>
-          </tr>
-          <tr>
-            <td data-link-for="DevicePostureType">
-              <a>Tablet</a>
-            </td>
-            <td>
-              <i>any orientation</i>
-            </td>
-            <td>
-              `[335° - 360°]` 
-            </td>
-          </tr>
-          <tr>
-            <td data-link-for="DevicePostureType">
-              <a>Book</a>
-            </td>
-            <td>
-              <i><a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-portrait-primary">"portrait-primary"</a> | <a href="https://www.w3.org/TR/screen-orientation/#dom-orientationlocktype-portrait-secondary">"portrait-secondary"</a></i>
-            </td>
-            <td>
-              `[0° - 140°[`
-            </td>
-          </tr>
-        </tbody>
+        <caption>Posture values for foldable devices</caption>
+        <tr>
+          <th>Posture</th><th>Angle value</th>
+        </tr>
+        <tr>
+          <td>continuous</td><td>< ~180°</td>
+        </tr>
+        <tr>
+          <td>folded</td><td>~180°</td>
+        </tr>
+        <tr>
+          <td>folded-over</td><td>> ~180°</td>
+        </tr>
       </table>
+       
     </section>
     <section>
       <h3>
