@@ -33,14 +33,32 @@
         otherLinks: [{
          key: 'Additional resources',
          data: [{
-           value: `'Fold State' initial explainer & key scenarios`,
-           href: 'https://github.com/SamsungInternet/Explainers/blob/master/Foldables/FoldState.md'
+           value: `Explainer`,
+           href: 'https://github.com/w3c/device-posture/blob/gh-pages/README.md'
          },{
            value: 'Polyfill',
            href: 'https://w3c.github.io/device-posture/polyfill/demo.html'
          }]
         }],
-        xref: "web-platform"
+        xref: "web-platform",
+        logos: [
+        {
+          src: "./images/daswg-logo.svg",
+          url: "https://www.w3.org/das/",
+          alt: "Devices and Sensors WG logo",
+          width: 100,
+          height: 100,
+          id: "das-logo",
+        },
+        {
+          src: "./images/dp-logo-title.svg",
+          url: "",
+          alt: "Device Posture API logo",
+          width: 100,
+          height: 100,
+          id: "device-posture-logo",
+        }
+      ], 
       };
     </script>
     <style>
@@ -90,7 +108,7 @@
     <section id='abstract'>
       <p>
         This document specifies an API that allows web applications to request
-        and be notified of changes of the posture of a foldable device.
+        and be notified of changes of the posture of a device.
       </p>
     </section>
     <section id='sotd'>
@@ -109,9 +127,7 @@
         Introduction
       </h2>
       <p>
-        New types of mobile devices are appearing that have some sort of folding capabilities around the screen. Hence, 
-        when the device folds, it physically can be different form factor. The main interest in knowing the posture is to 
-        enable new user experiences with responsive design.
+        New types of mobile devices are appearing that have some sort of capabilities that allow them to change their posture. The most common types of devices are the ones that can fold (their screen or around their screen), allowing them to physically alter their form factor. The main interest in knowing the posture of a device is to enable new user experiences with responsive design.
       </p>
       <p>Among the described "folding" devices, there are mainly two different physical form factors: devices with a single
          flexible screen (seamless), and devices with two screens (with seam). They can both fold around a hinge, and the 
@@ -125,7 +141,7 @@
       </span>
       <p>
         From enhancing the usability of a website by avoiding the area of a fold, to enabling innovative use cases for the 
-        web, knowing the posture can help developers tailor their content to different devices.
+        web, knowing the posture of a device can help developers tailor their content to different devices.
       </p>
       <p>
         Content can be consumed and browsed even when the device is not flat, in which case the developer might want to 
@@ -137,7 +153,7 @@
         Internal slots
       </h3>
       <p>
-        The following internal slots are added to the {{Document}} interface.
+        The following internal slots are added to the {{Document}} interface. As it name implies, it will house the value of the current posture the device is 
       </p>
       <table class="simple">
         <thead>
@@ -153,7 +169,7 @@
         <tbody>
           <tr>
             <td>
-              <dfn>[[\CurrentPosture]]</dfn>
+              <dfn data-dfn-for="Document">[[\CurrentPosture]]</dfn>
             </td>
             <td>
               The <dfn>current posture</dfn>.
@@ -203,7 +219,7 @@
         <h3>The <dfn>type</dfn> attribute: Get current device posture</h3>
         <p>
           When getting the type attribute, the user agent MUST return the value of
-          [=environment settings object/responsible document=]'s internal slot {{[[CurrentPosture]]}}.
+          [=environment settings object/responsible document=]'s internal slot {{Document/[[CurrentPosture]]}}.
         </p>
       </section>
       <section>
@@ -303,7 +319,7 @@
         Reading the posture
       </h2>
       <p>
-        All <a>documents</a> have an internal slot [[\CurrentPosture]], which should be
+        All <a>document</a>s have an internal slot {{Document/[[CurrentPosture]]}}, which should be
         initialized when the <a>document</a> is created, otherwise they MUST
         be initialized the first time they are accessed and before their
         value is read. The <a>user agent</a> MUST <a>update the device posture
@@ -513,7 +529,7 @@
         </p>
         <ol class="algorithm">
           <li>
-            Update the <a>document</a>.{{[[CurrentPosture]]}} given current hinge angle value,
+            Update the <a>document</a>.{{Document/[[CurrentPosture]]}} given current hinge angle value,
             <a>current screen orientation</a>, as well as potential implementation-specific
             signals, according to <a>posture values table</a>.
           </li>
@@ -564,12 +580,12 @@
             Let |document| be the <a>document</a> in question.
           </li>
           <li>
-            Let |posture| be the |document|.{{[[CurrentPosture]]}}.
+            Let |posture| be the |document|.{{Document/[[CurrentPosture]]}}.
           </li>
           <li>
             <a>Update the device posture information</a> of the |document|.
           </li>
-          <li>If |posture| is different from the |document|.{{[[CurrentPosture]]}},
+          <li>If |posture| is different from the |document|.{{Document/[[CurrentPosture]]}},
             run the following sub-steps:
             <ol>
               <li>
