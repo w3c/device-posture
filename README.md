@@ -3,7 +3,7 @@
 # Device Posture API
 
 ## Authors
-* [Diego González-Zúñiga](https://twitter.com/diekus) ([Samsung](https://samsunginter.net))
+* [Diego González-Zúñiga](https://twitter.com/diekus) ([Microsoft](https://microsoft.com))
 * [Kenneth Rohde Christiansen](https://twitter.com/kennethrohde) ([Intel](https://intel.com))
 
 ## Abstract
