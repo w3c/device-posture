@@ -12,7 +12,7 @@ This document specifies an API that allows web applications to request and be no
 
 ## Goals
 
-New types of mobile devices are appearing that have some sort of **capabilities that allow them to change their posture**. The most common types of devices are the ones that can fold (their screen or around their screen), allowing them to physically alter their form factor. The **main interest in knowing the posture of a device is to enable new user experiences with responsive design**.
+The device posture is the physical position in which a device holds which may be derived from sensors in addition to the angle. New types of mobile devices are appearing that have some sort of **capabilities that allow them to change their posture**. The most common types of devices are the ones that can fold (their screen or around their screen), allowing them to physically alter their form factor. The **main interest in knowing the posture of a device is to enable new user experiences with responsive design**.
 
 ## Proposals
 ### New CSS media query: `device-posture`
