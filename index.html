@@ -364,7 +364,7 @@
         Reading the posture
       </h2>
       <p>
-        All <a>document</a>s have an internal slot {{Document/[[CurrentPosture]]}}, which should be
+        Every instance of {{Document}} has an internal slot {{Document/[[CurrentPosture]]}}, which should be
         initialized when the <a>document</a> is created, otherwise they MUST be initialized the
         first time they are accessed and before their value is read. The <a>user agent</a> MUST
         <a>update the device posture information</a> of the <a>document</a> to initialize it.
@@ -446,9 +446,10 @@
           follows:
         </p>
         <ol class="algorithm">
-          <li>Update the <a>document</a>.{{Document/[[CurrentPosture]]}} given current hinge angle
-          value, <a>current screen orientation</a>, as well as potential implementation-specific
-          signals, according to <a>posture values table</a>.
+          <li>
+            Update the <a>document</a>.{{Document/[[CurrentPosture]]}} given current hinge angle value,
+            <a>current screen orientation</a>, as well as potential implementation-specific
+            signals, according to <a>posture values table</a>.
           </li>
         </ol>
       </section>
@@ -490,13 +491,14 @@
         <ol class="algorithm">
           <li>Let |document| be the <a>document</a> in question.
           </li>
-          <li>Let |posture| be the |document|.{{Document/[[CurrentPosture]]}}.
+          <li>
+            Let |posture| be the |document|.{{Document/[[CurrentPosture]]}}.
           </li>
           <li>
             <a>Update the device posture information</a> of the |document|.
           </li>
-          <li>If |posture| is different from the |document|.{{Document/[[CurrentPosture]]}}, run
-          the following sub-steps:
+          <li>If |posture| is different from the |document|.{{Document/[[CurrentPosture]]}},
+            run the following sub-steps:
             <ol>
               <li>
                 <a>Fire an event</a> named `change` at the |document|'s
