@@ -223,8 +223,7 @@
 
         enum DevicePostureType {
           "continuous",
-          "folded",
-          "folded-over"          
+          "folded"      
         };
       </pre>
       <section>
@@ -317,22 +316,6 @@
             </li>
           </ul>
         </li>
-        <li>
-          <img src="images/folded-over-posture.svg" class="drawing" alt=
-          "drawing of the folded over posture"> <a>Folded-over</a> posture: The
-          folded-over posture is when the device is physically folded and the
-          screens/sections surpass the ~200° angle. It is also known as the
-          'tent' posture when the device is being used with its hinge parallel
-          to a surface.
-          <p>
-            Examples of these are:
-          </p>
-          <ul>
-            <li>2-in-1 device on a surface displaying content for users on each
-            side of the device (games).
-            </li>
-          </ul>
-        </li>
       </ol>
       <p>
         In the API, the [=posture=] values are represented by the
@@ -358,7 +341,7 @@
           Value:
         </dt>
         <dd>
-          <a>continuous</a> | <a>folded</a> | <a>folded-over</a>
+          <a>continuous</a> | <a>folded</a>
         </dd>
         <dt>
           Applies to:
@@ -444,14 +427,6 @@
           </td>
           <td>
             ~180°
-          </td>
-        </tr>
-        <tr>
-          <td>
-            folded-over
-          </td>
-          <td>
-            &gt; ~180°
           </td>
         </tr>
       </table>
