@@ -52,7 +52,9 @@ https://github.com/foldable-devices/demos
 
 ## Stakeholder Feedback
 Mozilla Position: https://github.com/mozilla/standards-positions/issues/882
+
 WebKit Position: https://github.com/WebKit/standards-positions/issues/328
+
 Chrome Status Entry: https://chromestatus.com/feature/5185813744975872
 
 ## References & Acknowledgements
