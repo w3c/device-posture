@@ -21,17 +21,14 @@ We propose a media query that would resolve to a set of fixed postures. These po
 
 Among the values that the device-posture query can take are:
 * `folded` (applies to laptop/book postures)
-* `folded-over` (applies to tent modes)
 * `continuous` (applies to flat, tablet, or even seamless curved displays)
 
 #### Examples
 
 ```css
 /*using the device in a 'book' posture*/
-@media (device-posture: folded) and (screen-spanning: single-fold-vertical) { ... }
+@media (device-posture: folded) { ... }
 
-/*using the device in a 'tent' posture*/
-@media (device-posture: folded-over) { ... }
 ```
 ### New JS object in `window.navigator`: `devicePosture`
 
