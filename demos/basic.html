@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Screen Fold API BASIC DEMO</title>
+    <title>Device Posture API Basic Demo</title>
     <style>
         html {
             background-color: blue;
         }
-        @media (max-screen-fold-angle: 120deg) {
+        @media (device-posture: folded) {
             html {
                 background-color: red;
+            }
+        }
+
+        @media (device-posture: continuous) {
+            html {
+                background-color: green;
             }
         }
     </style>
