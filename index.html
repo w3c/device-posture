@@ -653,17 +653,17 @@
         "https://github.com/SamsungInternet/Explainers/blob/master/Foldables/FoldState.md#key-scenarios">
         explainer</a> for other key scenarios.
       </p><img src="images/example-videocall.svg" alt=
-      "An illustration of a video call web service that uses the screen-fold-posture media feature"
+      "An illustration of a video call web service that uses the device-posture media feature and the viewport segment media feature"
       class="img-example">
       <pre class="example css" title="Adapting UI to posture">
-        @media (device-posture: laptop) and (spanning: single-fold-horizontal){
+        @media (device-posture: folded) and (vertical-viewport-segments: 1) {
           body {
             display: flex;
             flex-flow: column nowrap;
           }
 
           .videocall-area, .videocall-controls  {
-            flex: 1 1 env(fold-bottom);
+            flex: 1 1 env(viewport-segment-bottom 0 0);
           }
         }
       </pre>
