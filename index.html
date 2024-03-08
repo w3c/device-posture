@@ -250,9 +250,10 @@
           The <dfn>onchange</dfn> attribute: Handle posture changes
         </h3>
         <p data-link-for="DevicePosture">
-          The {{onchange}} attribute is an <a data-cite="html">event
-          handler</a> whose corresponding <a data-cite="html">event handler
-          event type</a> is "<code>change</code>".
+          The {{onchange}} attribute is an <a>event handler IDL attribute</a>
+          for the {{onchange}} [=event handler=], whose [=event handler event
+          type=] is "<dfn class="event" data-dfn-for=
+          "DevicePosture">change</dfn>".
         </p>
       </section>
     </section>
@@ -378,8 +379,8 @@
         {{Document/[[CurrentPosture]]}}, which should be initialized when the
         <a>document</a> is created, otherwise they MUST be initialized the
         first time they are accessed and before their value is read. The
-        <a>user agent</a> MUST <a>update the device posture information</a> of
-        the <a>document</a> to initialize it.
+        <a>user agent</a> MUST run the <a>device posture change steps</a> with
+        the <a>document</a> and true to initialize it.
       </p>
       <p>
         For a given <a>document</a>, the <a>current posture</a> is derived from
@@ -445,17 +446,18 @@
       </h3>
       <section data-link-for="DevicePosture">
         <h2>
-          Updating the device posture information
+          Calculating the device posture information
         </h2>
         <p>
-          The steps to <dfn>update the device posture information</dfn> of a
-          <a>document</a> are as follows:
+          The steps to <dfn>calculate the device posture information</dfn> of a
+          {{Document}} |document:Document| are as follows:
         </p>
         <ol class="algorithm">
-          <li>Update the <a>document</a>.{{Document/[[CurrentPosture]]}} given
-          current hinge angle value, <a>current screen orientation</a>, as well
-          as potential implementation-specific signals, according to <a>posture
-          values table</a>.
+          <li>Return a {{DevicePostureType}} value determined in an
+          [=implementation-defined=] way based on the current hinge angle
+          value, [=current screen orientation=], as well as potential
+          implementation-specific signals, according to the [=posture values
+          table=].
           </li>
         </ol>
       </section>
@@ -464,74 +466,70 @@
           Device Posture change
         </h2>
         <p>
-          Whenever the screen(s) fold angle, screen orientation or device
-          specific signals change, the <a>user agent</a> MUST run the following
-          steps as part of the next <a>animation frame task</a>:
+          When the user agent determines that the screen(s)' fold angle,
+          orientation or device-specific signals have changed for a [=top-level
+          traversable=], it MUST run the [=device posture change steps=] with
+          the [=top-level traversable=]'s [=navigable/active document=].
+        </p>
+        <p>
+          The <dfn>device posture change steps</dfn> for a {{Document}}
+          |document:Document| and an optional boolean |disallowRecursion|
+          (default false) are as follows:
         </p>
         <ol class="algorithm">
-          <li>Let |browsing contexts| be the <a>list of the descendant browsing
-          contexts</a> of the <a>top-level browsing context</a>'s
-          <a>document</a>.
+          <li>If |document|'s [=Document/visibility state=] is "hidden", then
+          abort these steps.
           </li>
-          <li>[=list/for each=] |context:browsing context| in |browsing
-          contexts|, run the following sub-steps:
+          <li>Let |posture| be the result of invoking [=calculate the device
+          posture information=] with |document|.
+          </li>
+          <li>If |posture| is equal to
+          |document|.{{Document/[[CurrentPosture]]}}, abort these steps.
+          </li>
+          <li>[=Queue a global task=] on the [=user interaction task source=]
+          with |document|'s [=relevant global object=] to perform the following
+          steps:
             <ol>
-              <li>Let |document| be the |context|'s [=navigable/active
-              document=].
+              <!-- We should use [=associated `Navigator`=], but the <dfn> is not exported by the
+          HTML spec. -->
+              <li>Set |documet|.{{Document/[[CurrentPosture]]}} to |posture|.
               </li>
-              <li>If |document| is not visible per [[PAGE-VISIBILITY]], abort
-              these steps.
+              <li>[=Fire an event=] named "{{DevicePosture/change}}" at the
+              {{DevicePosture}} object associated with |document|'s [=relevant
+              global object=]'s associated {{Navigator}}.
               </li>
-              <li>
-                <a>Update the device posture information</a> of |document|.
-              </li>
-              <li>
-                <a>Fire an event</a> named `change` at |document|'s
-                {{Window.navigator.devicePosture}} object.
+            </ol>
+          </li>
+          <li>If |disallowRecursion| is true, abort these steps.
+          </li>
+          <li>[=List/For each=] |descendantNavigable| of |document|'s
+          [=Document/descendant navigables=]:
+            <ol>
+              <!-- If we do not pass true below, each descendant document will recurse into its
+          descendants too. -->
+              <li>Run the [=device posture change steps=] with
+              |descendantNavigable|'s [=navigable/active document=] and true.
               </li>
             </ol>
           </li>
         </ol>
         <p>
-          Whenever a <a>document</a> becomes visible per [[PAGE-VISIBILITY]],
-          in other words after the <a>now visible algorithm</a> is run, the
-          <a>user agent</a> MUST run the following substeps as part of the next
-          <a>animation frame task</a>:
+          This specification defines the following [=page visibility change
+          steps=] given |visibility state| and |document:Document|:
         </p>
         <ol class="algorithm">
-          <li>Let |document| be the <a>document</a> in question.
-          </li>
-          <li>Let |posture| be the |document|.{{Document/[[CurrentPosture]]}}.
-          </li>
-          <li>
-            <a>Update the device posture information</a> of the |document|.
-          </li>
-          <li>If |posture| is different from the
-          |document|.{{Document/[[CurrentPosture]]}}, run the following
-          sub-steps:
-            <ol>
-              <li>
-                <a>Fire an event</a> named `change` at the |document|'s
-                {{Window.navigator.devicePosture}} object.
-              </li>
-            </ol>
+          <li>Run the [=device posture change steps=] on |document|.
           </li>
         </ol>
-        <div class="note">
+        <aside class="note">
           <p>
-            Developers need to be aware that a
-            {{Window.navigator.devicePosture}} object from a <a>document</a>
-            that is not visible, as per [[PAGE-VISIBILITY]], will not receive
-            an orientation change event. This is to prevent unnecessary changes
-            to layout, etc. in the non-visible web application.
+            Developers need to be aware that [=documents=] with a "hidden"
+            [=Document/visibility state=] will not receive a device posture
+            change event. However, once the [=document=] becomes visible again,
+            it will receive the change event.
           </p>
-        </div>
-        <div class='issue'>
-          This section could be improved if the [[PAGE-VISIBILITY]]
-          specification had a hook for when the document becomes visible and
-          hidden. <a href='https://github.com/w3c/page-visibility/pull/54'>PR
-          54</a>.
-        </div>
+        </aside>
+        <div class="issue" data-number="103"></div>
       </section>
     </section>
     <section>
@@ -697,26 +695,6 @@ please refer to <a>Evaluating Media Features in a Boolean Context</a>.
         "MEDIAQ#mq-boolean-context">Evaluating Media Features in a Boolean
         Context</dfn>.
       </p>
-      <p>
-        The following concepts and interfaces are defined in [[HTML]]:
-        <dfn data-cite=
-        "HTML/browsers.html#list-of-the-descendant-browsing-contexts">list of
-        the descendant browsing contexts</dfn>.
-      </p>
-      <p>
-        The following is defined in [[PAGE-VISIBILITY]]: <dfn data-cite=
-        "PAGE-VISIBILITY#dfn-now-visible-algorithm">now visible
-        algorithm</dfn>.
-      </p>
-      <p>
-        The following is used but not defined in [[FULLSCREEN]]: <dfn><a href=
-        'https://github.com/whatwg/fullscreen/issues/16'>animation frame
-        task</a></dfn>.
-      </p>
-      <div class='issue'>
-        This should now be updated since the <a>animation frame task</a> issue
-        is recently resolved and the timing is now defined.
-      </div>
     </section>
     <section id="conformance">
       <p>
