@@ -58,8 +58,7 @@ The device posture API could be used to identify whether the device is a foldabl
 
 ### 2.13. How does this specification distinguish between behavior in first-party and third-party contexts?
 
-The specified API will be available in third-part contexts via iframe
-guarded by permission policy and focus requirements. The API is also only available in secure contexts.
+The specified API will be available in third-party contexts via iframe either through CSS or JavaScript.
 
 ### 2.14. How does this specification work in the context of a user agent’s Private Browsing or "incognito" mode?
 
