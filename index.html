@@ -49,9 +49,6 @@
         }],
         xref: {
           profile: "web-platform",
-          specs: [
-            "permissions-policy"
-          ]
         },
         logos: [
         {
@@ -537,41 +534,6 @@
           54</a>.
         </div>
       </section>
-    </section>
-    <section>
-      <h3>
-        Policy control
-      </h3>
-      <p>
-        The Device Posture API defines a [=policy-controlled feature=]
-        identified by the token "device-posture".
-        Its [=policy-controlled feature/default allowlist=] is `'self'`.
-      </p>
-      <aside class="note">
-        <p>
-          The [=policy-controlled feature/default allowlist=] of `'self'` allows usage in
-          same-origin nested frames but prevents third-party content from using
-          the feature.
-        </p>
-        <p>
-          Third-party usage can be selectively enabled by adding
-          `allow="device-posture"` attribute to the frame container element:
-        </p>
-        <pre class="example html" title=
-        "Enabling device posture on remote content">
-          &lt;iframe src="https://third-party.com" allow="device-posture"/&gt;&lt;/iframe&gt;
-        </pre>
-        <p>
-          Alternatively, the Device Posture API can be disabled completely by
-          specifying the permissions policy in a HTTP response header:
-        </p>
-        <pre class="example http" title="Feature Policy over HTTP">
-          Permissions-Policy: {"device-posture": []}
-        </pre>
-        <p>
-          See [[[PERMISSIONS-POLICY]]] for more details.
-        </p>
-      </aside>
     </section>
     <section>
       <h2>
