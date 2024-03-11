@@ -262,7 +262,7 @@
           <p>
             Due to the nature of hardware innovation, it also includes devices
             with dual, foldable, rollable or curved screens, as long as they
-            are in a posture where the document is expected to be displayed
+            are in a posture where the {{Document}} is expected to be displayed
             with a flat layout.
           </p>
           <p>
@@ -359,13 +359,13 @@
       <p>
         Every instance of {{Document}} has an internal slot
         {{Document/[[CurrentPosture]]}}, which should be initialized when the
-        <a>document</a> is created, otherwise they MUST be initialized the
+        {{Document}} is created, otherwise they MUST be initialized the
         first time they are accessed and before their value is read. The
         <a>user agent</a> MUST run the <a>device posture change steps</a> with
-        the <a>document</a> and true to initialize it.
+        the {{Document}} and true to initialize it.
       </p>
       <p>
-        For a given <a>document</a>, the <a>current posture</a> is derived from
+        For a given {{Document}}, the <a>current posture</a> is derived from
         the current hinge angle and the <a>current screen orientation</a>, and
         potentially other implementation-specific signals.
       </p>
@@ -581,9 +581,9 @@
             Focused Area
           </h4>
           <p>
-            Posture value readings are only available for active documents
+            Posture value readings are only available for each [=navigable/active document=]
             whose origin is the same origin-domain with the currently focused
-            area document.
+            area {{Document}}.
           </p>
           <p>
             This is done in order to mitigate the risk of a skimming attack
@@ -597,7 +597,7 @@
             Visibility State
           </h4>
           <p>
-            Posture value change events are only fired for active documents
+            Posture value change events are only fired for each [=navigable/active document=]
             whose [=Document/visibility state=] is "visible", and polling the
             value while that is not the case, will return a stale value as the
             value is only updated while the visibility state is "visible" or
