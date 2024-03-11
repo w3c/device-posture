@@ -361,8 +361,9 @@
         {{Document/[[CurrentPosture]]}}, which should be initialized when the
         {{Document}} is created, otherwise they MUST be initialized the first
         time they are accessed and before their value is read. The <a>user
-        agent</a> MUST run the <a>device posture change steps</a> with the
-        {{Document}} and true to initialize it.
+        agent</a> MUST run the <a>device posture change steps</a> with [=device
+        posture change steps/document=] set to the {{Document}} and [=device
+        posture change steps/disallowRecursion=] set to true to initialize it.
       </p>
       <p>
         For a given {{Document}}, the <a>current posture</a> is derived from
@@ -455,12 +456,14 @@
         </p>
         <p>
           The <dfn>device posture change steps</dfn> for a {{Document}}
-          |document:Document| and an optional boolean |disallowRecursion|
-          (default false) are as follows:
+          <dfn data-dfn-for="device posture change steps">document</dfn> and an
+          optional boolean <dfn data-dfn-for=
+          "device posture change steps">disallowRecursion</dfn> (default false)
+          are as follows:
         </p>
         <ol class="algorithm">
-          <li>If |document|'s [=Document/visibility state=] is "hidden", then
-          abort these steps.
+          <li>If |document:Document|'s [=Document/visibility state=] is
+          "hidden", then abort these steps.
           </li>
           <li>Let |posture| be the result of invoking [=calculate the device
           posture information=] with |document|.
@@ -487,10 +490,13 @@
           <li>[=List/For each=] |descendantNavigable| of |document|'s
           [=Document/descendant navigables=]:
             <ol>
-              <!-- If we do not pass true below, each descendant document will recurse into its
-          descendants too. -->
-              <li>Run the [=device posture change steps=] with
-              |descendantNavigable|'s [=navigable/active document=] and true.
+              <!-- If we do not set disallowRecursion to true below,
+                   each descendant document will recurse into its
+                   descendants too. -->
+              <li>Run the [=device posture change steps=] with [=device posture
+              change steps/document=] set to |descendantNavigable|'s
+              [=navigable/active document=] and [=device posture change
+              steps/disallowRecursion=] set to true.
               </li>
             </ol>
           </li>
@@ -500,7 +506,9 @@
           steps=] given |visibility state| and |document:Document|:
         </p>
         <ol class="algorithm">
-          <li>Run the [=device posture change steps=] on |document|.
+          <li>Run the [=device posture change steps=] on |document| and
+          [=device posture change steps/disallowRecursion=] set to false to
+          initialize it.
           </li>
         </ol>
         <aside class="note">
