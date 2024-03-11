@@ -1,4 +1,5 @@
 <img width="247" alt="favicon" src="https://user-images.githubusercontent.com/73939538/123794912-4c089380-d8db-11eb-811b-7367461cfdd4.png">
+<img width="330" alt="favicon" src="images/daswg-logo.svg">
 
 # Device Posture API
 
