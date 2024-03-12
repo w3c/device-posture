@@ -617,55 +617,62 @@
     <section>
       <h2>
         Accessibility considerations
-      </h2>
-      The main focus of the Device Posture API is to improve the user experience. There are three ways
-      in which applications that build on the API can positively impact accessibility.
+      </h2>The main focus of the Device Posture API is to improve the user
+      experience. There are three ways in which applications that build on the
+      API can positively impact accessibility.
       <ol>
-        <li>Designing and making applications which do not place content in the fold/hinge
-          area, especially buttons. This area is typically hard to interact with with fingers
-          because the curvature of the fold make touch less precise or impossible.
+        <li>Designing and making applications which do not place content in the
+        fold/hinge area, especially buttons. This area is typically hard to
+        interact with with fingers because the curvature of the fold make touch
+        less precise or impossible.
         </li>
-        <li>Designing and making applications which do not put a large contiguous content
-          (like a video or a picture) spanning across the fold/hinge area if the device is folded.
-          This area slightly distorts content and colors.
+        <li>Designing and making applications which do not put a large
+        contiguous content (like a video or a picture) spanning across the
+        fold/hinge area if the device is folded. This area slightly distorts
+        content and colors.
         </li>
-        <li>Designing and making applications which use the screen estate better by
-          providing a split UI - a user interface where the content is split up across
-          the screen segments -, allowing the application to provide a differentiated
-          and more powerful interface.
+        <li>Designing and making applications which use the screen estate
+        better by providing a split UI - a user interface where the content is
+        split up across the screen segments -, allowing the application to
+        provide a differentiated and more powerful interface.
         </li>
-      </ol>
-        When using this API it is important to consider the opportunities above with accessibility
-        in mind. Here are few concrete examples:
+      </ol>When using this API it is important to consider the opportunities
+      above with accessibility in mind. Here are few concrete examples:
       <ul>
-        <li><strong>Placement of UI elements:</strong> A typical placement logic for dialogs
-          is to center them horizontally and vertically but in a device folded
-          with a symmetrical fold they may end up in the middle of the fold area
-          making it harder to interact with, for instance clicking on buttons.
-          It might also make it harder to read text due to distortion and light
-          reflection.
+        <li>
+          <strong>Placement of UI elements:</strong> A typical placement logic
+          for dialogs is to center them horizontally and vertically but in a
+          device folded with a symmetrical fold they may end up in the middle
+          of the fold area making it harder to interact with, for instance
+          clicking on buttons. It might also make it harder to read text due to
+          distortion and light reflection.
         </li>
-        <li><strong>Fullscreen mode:</strong> When resizing an element in
-          fullscreen, a typical logic would expand that element to the width and
-          the height of the {{Window}}. If the device is folded, the element will be
-          laid out across the fold making a subpar user experience.
-          An alternative is to display that element either on top or
-          below the fold area.
+        <li>
+          <strong>Fullscreen mode:</strong> When resizing an element in
+          fullscreen, a typical logic would expand that element to the width
+          and the height of the {{Window}}. If the device is folded, the
+          element will be laid out across the fold making a subpar user
+          experience. An alternative is to display that element either on top
+          or below the fold area.
         </li>
-        <li><strong>Improving the user experience:</strong> With this API it is possible
-          to create a different and adapted user experience when the device is folded,
-          allowing for a better user experience and improved accessibility.
-          For example, when watching a video and the device is folded, the video could
-          be displayed on top of the fold while the comments section could be shown below
-          the fold by default.
-          Another example would be a video conferencing application showing the video
+        <li>
+          <strong>Improving the user experience:</strong> With this API it is
+          possible to create a different and adapted user experience when the
+          device is folded, allowing for a better user experience and improved
+          accessibility. For example, when watching a video and the device is
+          folded, the video could be displayed on top of the fold while the
+          comments section could be shown below the fold by default. Another
+          example would be a video conferencing application showing the video
           feed on top of the fold and the chat below the fold.
         </li>
-        <li><strong>Content shouldn't be designed for just one {{posture}}:</strong>
-          The idea of foldable devices is their versatility and the ability for the user
-          to change the posture as they see fit. With accessibility, it is important to not
-          always choose for the user as they might have other needs but allowing them to choose
-          the UI that fits their needs better. Ideally it is preferred to make the UI configurable.
+        <li>
+          <strong>Content shouldn't be designed for just one
+          {{posture}}:</strong> The idea of foldable devices is their
+          versatility and the ability for the user to change the posture as
+          they see fit. With accessibility, it is important to not always
+          choose for the user as they might have other needs but allowing them
+          to choose the UI that fits their needs better. Ideally it is
+          preferred to make the UI configurable.
         </li>
       </ul>
     </section>
