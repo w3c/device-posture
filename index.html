@@ -96,7 +96,8 @@
       }
     </style>
   </head>
-  <body data-cite="FEATURE-POLICY PERMISSIONS CSSOM-VIEW MEDIAQUERIES SCREEN-ORIENTATION">
+  <body data-cite=
+  "FEATURE-POLICY PERMISSIONS CSSOM-VIEW MEDIAQUERIES SCREEN-ORIENTATION">
     <section id='abstract'>
       <p>
         This document specifies an API that allows web applications to request
@@ -381,10 +382,11 @@
         instance, a device might not yield exactly 180° when laying flat, but
         instead values ranging from 175° to 185°. Device makers SHOULD make
         sure that the physical device postures map correctly to the postures
-        defined by this specification. Device makers are also allowed to determine
-        the posture using more sensors than just the hinge angle. For example,
-        they can also detect if keyboard is docked on the bottom half of the screen
-        or not. Another example is to detect whether the kickstand is deployed or not.
+        defined by this specification. Device makers are also allowed to
+        determine the posture using more sensors than just the hinge angle. For
+        example, they can also detect if keyboard is docked on the bottom half
+        of the screen or not. Another example is to detect whether the
+        kickstand is deployed or not.
       </p>
       <p>
         Some devices might also lack one or more of the postures due to
@@ -530,26 +532,27 @@
         Security Considerations
       </h2>
       <p>
-        No new security considerations have been reported on this specification.
+        No new security considerations have been reported on this
+        specification.
       </p>
-  </section>
+    </section>
     <section>
       <h2>
         Privacy considerations
       </h2>
       <p>
-        The Device Posture API exposes a <a>posture</a> determined from the hinge
-        angle sensor, but additional data can be used to determine the posture
-        such as whether the keyboard is attached or not, whether the
+        The Device Posture API exposes a <a>posture</a> determined from the
+        hinge angle sensor, but additional data can be used to determine the
+        posture such as whether the keyboard is attached or not, whether the
         kickstand is deployed or not, etc.
       </p>
       <p>
-        Device Posture exposes high level concept and not sensor values
-        making fingerprinting possibilities more limited. Changing
-        posture is a physical manipulation done by the user. The frequency of
-        the posture changes are low, users do not constantly adjust the angle,
-        and even if they do the <a>posture</a> will only be changed in certain
-        scenarios as described in [=posture values table=].
+        Device Posture exposes high level concept and not sensor values making
+        fingerprinting possibilities more limited. Changing posture is a
+        physical manipulation done by the user. The frequency of the posture
+        changes are low, users do not constantly adjust the angle, and even if
+        they do the <a>posture</a> will only be changed in certain scenarios as
+        described in [=posture values table=].
       </p>
       <section>
         <h3>
@@ -563,27 +566,28 @@
         </h4>
         <p>
           If this API can be used simultaneously in different window contexts
-          on the same device it may be possible for that code to correlate
-          the user across those two contexts, creating unanticipated
-          tracking mechanisms. However, because the posture value is typically
-          stable for a long time it could only be used to verify that two users
-          are not the same, but it would not help to identify a given user given
-          the fact that there are multiple types and models of foldable devices.
+          on the same device it may be possible for that code to correlate the
+          user across those two contexts, creating unanticipated tracking
+          mechanisms. However, because the posture value is typically stable
+          for a long time it could only be used to verify that two users are
+          not the same, but it would not help to identify a given user given
+          the fact that there are multiple types and models of foldable
+          devices.
         </p>
         <p>
-          This API's entropy is comparable to the
-          <a data-xref-type="css-descriptor" data-xref-for="@media">pointer</a>
-          API which tells whether the user's primary input is touch-based or not.
-          However, the primary input can change on devices where
-          the keyboard can be removed/added or the tablet mode is activated/deactivated.
+          This API's entropy is comparable to the <a data-xref-type=
+          "css-descriptor" data-xref-for="@media">pointer</a> API which tells
+          whether the user's primary input is touch-based or not. However, the
+          primary input can change on devices where the keyboard can be
+          removed/added or the tablet mode is activated/deactivated.
         </p>
-
         <h4>
-         iframes
+          iframes
         </h4>
         <p>
-          iframes have access to the posture through this API and therefore could use
-          this information to identify users as mentioned in [[[#identifying-users-across-contexts]]].
+          iframes have access to the posture through this API and therefore
+          could use this information to identify users as mentioned in
+          [[[#identifying-users-across-contexts]]].
         </p>
       </section>
       <section>
