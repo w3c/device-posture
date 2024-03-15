@@ -190,7 +190,7 @@
       </table>
     </section>
     <section data-dfn-for="Navigator">
-      <h2>
+      <h2 id="extensions-to-the-navigator-interface">
         Extensions to the `Navigator` interface
       </h2>
       <p>
@@ -606,25 +606,10 @@
           <p>
             Posture value readings are explicitly flagged by the Secure
             Contexts specification as a high-value target for network
-            attackers. Thus all interfaces defined by this specification or
-            extension specifications are only available within a secure
-            context.
-          </p>
-        </section>
-        <section>
-          <h4>
-            Focused Area
-          </h4>
-          <p>
-            Posture value readings are only available for each
-            [=navigable/active document=] whose origin is the same
-            origin-domain with the currently focused area {{Document}}.
-          </p>
-          <p>
-            This is done in order to mitigate the risk of a skimming attack
-            against the browsing context containing an element which has gained
-            focus, for example when the user carries out an in-game purchase
-            using a third party payment service from within an iframe.
+            attackers. {{DevicePosture}} has the {{SecureContext}}
+            extended attribute in its declaration, and so does the
+            addition to the {{Navigator}} interface
+            ([[[#extensions-to-the-navigator-interface]]]).
           </p>
         </section>
         <section>
@@ -634,7 +619,8 @@
           <p>
             Posture value change events are only fired for each
             [=navigable/active document=] whose [=Document/visibility state=]
-            is "visible", and polling the value while that is not the case,
+            is "visible" as explained in [=device posture change steps=],
+            and polling the value while that is not the case,
             will return a stale value as the value is only updated while the
             visibility state is "visible" or just changed to "visible".
           </p>
