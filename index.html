@@ -205,8 +205,8 @@
         <tbody>
           <tr>
             <td>
-              <dfn data-dfn-for="top-level traversable">[[\PostureOverride]]
-              </dfn>
+              <dfn data-dfn-for=
+              "top-level traversable">[[\PostureOverride]]</dfn>
             </td>
             <td>
               Posture to override posture defined by hardware. Used in
@@ -216,7 +216,8 @@
                 </li>
                 <li>"{{DevicePostureType/folded}}"
                 </li>
-                <li><code>null</code>: Used when posture is defined by hardware.
+                <li>
+                  <code>null</code>: Used when posture is defined by hardware.
                 </li>
               </ul>
             </td>
@@ -483,8 +484,9 @@
           <li>Let |topLevelTraversable| be |document|'s [=relevant global
           object=]'s [=navigable=]'s [=top-level traversable=].
           </li>
-          <li>If |topLevelTraversable|.<a data-link-for="top-level traversable">
-          [[\PostureOverride]]</a> is non-null, return it.
+          <li>If |topLevelTraversable|. <a data-link-for=
+          "top-level traversable">[[\PostureOverride]]</a> is non-null, return
+          it.
           </li>
           <li>Return a {{DevicePostureType}} value determined in an
           [=implementation-defined=] way based on the current hinge angle
@@ -737,10 +739,10 @@
       </h2>
       <p>
         The Device Posture API pose a challenge to test authors, as fully
-        exercising interface requires physical hardware devices. To address this
-        challenge this document defines a [[WEBDRIVER2]] [=extension commands=]
-        that allows users to control the reported device posture and simulate a
-        real device.
+        exercising interface requires physical hardware devices. To address
+        this challenge this document defines a [[WEBDRIVER2]] [=extension
+        commands=] that allows users to control the reported device posture and
+        simulate a real device.
       </p>
       <h3>
         Extension Commands
@@ -782,7 +784,7 @@
             Value type
           </th>
           <th>
-          Required
+            Required
           </th>
         </tr>
         <tr>
@@ -801,23 +803,23 @@
         The [=remote end steps=] are:
       </p>
       <ol class="algorithm" data-cite="WEBDRIVER2">
-        <li>Let |posture| be the result of invoking
-        <a data-cite="!WEBDRIVER2#dfn-getting-properties">get a property</a>
-        "posture" from |parameters|.
+        <li>Let |posture| be the result of invoking <a data-cite=
+        "!WEBDRIVER2#dfn-getting-properties">get a property</a> "posture" from
+        |parameters|.
         </li>
-        <li>If |posture| is not a [=string=], return [=error=] with
-        [=error code|WebDriver error code=] [=invalid argument=].
+        <li>If |posture| is not a [=string=], return [=error=] with [=error
+        code|WebDriver error code=] [=invalid argument=].
         </li>
         <li>If |posture| is neither "{{DevicePostureType/continuous}}" nor
-        "{{DevicePostureType/folded}}", return [=error=] with
-        [=error code|WebDriver error code=] [=invalid argument=].
+        "{{DevicePostureType/folded}}", return [=error=] with [=error
+        code|WebDriver error code=] [=invalid argument=].
         </li>
-        <li>Let |topLevelTraversable| be the
-        <a data-cite="webdriver2/#dfn-current-browsing-context">current browsing
+        <li>Let |topLevelTraversable| be the <a data-cite=
+        "webdriver2/#dfn-current-browsing-context">current browsing
         context</a>'s [=browsing context/top-level traversable=].
         </li>
-        <li>Set |topLevelTraversable|.<a data-link-for="top-level traversable">
-        [[\PostureOverride]]</a> to |posture|.
+        <li>Set |topLevelTraversable|. <a data-link-for=
+        "top-level traversable">[[\PostureOverride]]</a> to |posture|.
         </li>
         <li>Let |document| be |topLevelTraversable|'s [=navigable/active
         document=].
@@ -856,17 +858,16 @@
         The [=remote end steps=] are:
       </p>
       <ol class="algorithm">
-        <li>Let |topLevelTraversable| be the
-        <a data-cite="webdriver2/#dfn-current-browsing-context">current browsing
+        <li>Let |topLevelTraversable| be the <a data-cite=
+        "webdriver2/#dfn-current-browsing-context">current browsing
         context</a>'s [=browsing context/top-level traversable=].
         </li>
-        <li>If |topLevelTraversable|.<a data-link-for="top-level traversable">
-        [[\PostureOverride]]</a> is <code>null</code>, return [=success=] with
-        data <code>null</code>.
+        <li>If |topLevelTraversable|. <a data-link-for="top-level traversable">
+          [[\PostureOverride]]</a> is <code>null</code>, return [=success=]
+          with data <code>null</code>.
         </li>
-        <li>Set |topLevelTraversable|.<a data-link-for="top-level traversable">
-        [[\PostureOverride]]</a> to
-        <code>null</code>.
+        <li>Set |topLevelTraversable|. <a data-link-for=
+        "top-level traversable">[[\PostureOverride]]</a> to <code>null</code>.
         </li>
         <li>Let |document| be |topLevelTraversable|'s [=navigable/active
         document=].
