@@ -574,7 +574,7 @@
     </section>
     <section>
       <h2>
-        Security Considerations
+        Security considerations
       </h2>
       <p>
         No new security considerations have been reported on this
@@ -585,20 +585,6 @@
       <h2>
         Privacy considerations
       </h2>
-      <p>
-        The Device Posture API exposes a <a>posture</a> determined from the
-        hinge angle sensor, but additional data can be used to determine the
-        posture such as whether the keyboard is attached or not, whether the
-        kickstand is deployed or not, etc.
-      </p>
-      <p>
-        Device Posture exposes high level concept and not sensor values making
-        fingerprinting possibilities more limited. Changing posture is a
-        physical manipulation done by the user. The frequency of the posture
-        changes are low, users do not constantly adjust the angle, and even if
-        they do the <a>posture</a> will only be changed in certain scenarios as
-        described in [=posture values table=].
-      </p>
       <section>
         <h3>
           Types of privacy threats
@@ -610,51 +596,73 @@
           Identifying users across contexts
         </h4>
         <p>
-          If this API can be used simultaneously in different window contexts
-          on the same device it may be possible for that code to correlate the
-          user across those two contexts, creating unanticipated tracking
-          mechanisms. However, because the posture value is typically stable
-          for a long time it could only be used to verify that two users are
-          not the same, but it would not help to identify a given user given
-          the fact that there are multiple types and models of foldable
-          devices.
+          When this API is used simultaneously in different browsing contexts
+          on the same device it may be possible to correlate the user across
+          those two contexts, creating unanticipated tracking mechanisms.
+          However, because the posture value is typically stable for a long
+          time it could only be used to verify that two users are not the same,
+          but it would not help to identify a given user given the fact that
+          there are multiple types and models of foldable devices.
         </p>
         <p>
-          This API's entropy is comparable to the <a data-xref-type=
+          The added entropy is comparable to the <a data-xref-type=
           "css-descriptor" data-xref-for="@media">pointer</a> API which tells
-          whether the user's primary input is touch-based or not. However, the
+          whether the user's primary input is touch-based or not. Such a
           primary input can change on devices where the keyboard can be
           removed/added or the tablet mode is activated/deactivated.
         </p>
+        <p>
+          This theoretical attack is mitigated by [[[#data-minimization]]],
+          [[[#user-attention]]], [[[#user-mediated-action]]] and
+          [[[#rate-limiting-change-notifications]]].
+        </p>
         <h4>
-          iframes
+          Cross-origin iframes
         </h4>
         <p>
-          iframes have access to the posture through this API and therefore
-          could use this information to identify users as mentioned in
-          [[[#identifying-users-across-contexts]]].
+          Cross-origin iframes have access to the posture through this API and
+          therefore could use this information to identify users similarly to
+          as mentioned in [[[#identifying-users-across-contexts]]]. The same
+          mitigations apply.
         </p>
       </section>
       <section>
         <h3>
-          Mitigation Strategies
+          Mitigation strategies
         </h3>
         <section>
-          <h4>
-            Secure Context
+          <h4 id="data-minimization">
+            Data minimization
           </h4>
           <p>
-            Posture value readings are explicitly flagged by the Secure
-            Contexts specification as a high-value target for network
-            attackers. {{DevicePosture}} has the {{SecureContext}} extended
-            attribute in its declaration, and so does the addition to the
-            {{Navigator}} interface
-            ([[[#extensions-to-the-navigator-interface]]]).
+            The API exposes a high-level abstraction referred to as a
+            <a>posture</a> that can be either
+            "{{DevicePostureType/continuous}}" or
+            "{{DevicePostureType/folded}}". Devices that do not support
+            different postures default to "{{DevicePostureType/continuous}}".
+            This means at most one bit of entropy is added to the fingerprint.
+            At most, because revealing this one bit will require a significant,
+            explicit physical action by the user to manipulate the physical
+            posture of the device required to trigger a change.
+          </p>
+          <p>
+            While implementations can use a variety of low-level information to
+            determine the most appropriate high-level posture, no low-level
+            details are exposed through this API. Furthermore, there is no
+            one-to-one mapping from any fine-grained low-level sensor reading
+            to a high-level posture state. An implementation can use e.g. a
+            hinge angle sensor, other sensors, information about whether a
+            keyboard is docked, or whether the kickstand is deployed, or any
+            combination of such information, to determine the most approriate
+            posture for the given form factor. This abstraction ensures only a
+            minimum amount of information necessary to implement the intended
+            functionality is exposed adhering to the data minimization
+            principles.
           </p>
         </section>
         <section>
-          <h4>
-            Visibility State
+          <h4 id="user-attention">
+            User attention
           </h4>
           <p>
             Posture value change events are only fired for each
@@ -663,6 +671,34 @@
             polling the value while that is not the case, will return a stale
             value as the value is only updated while the visibility state is
             "visible" or just changed to "visible".
+          </p>
+        </section>
+        <section>
+          <h4 id="user-mediated-action">
+            User-mediated action
+          </h4>
+          <p>
+            A user's significant and explicit physical action to modify the
+            device posture is required for a posture change. Significant,
+            because the action must cross the implementation-defined threshold
+            per [=posture values table=], and explicit, because the underlying
+            operating system adapts to posture changes similarly matching
+            user's learned expectations for an outcome of such an action.
+          </p>
+        </section>
+        <section>
+          <h4 id="rate-limiting-change-notifications">
+            Rate-limiting change notifications
+          </h4>
+          <p>
+            The API is designed to minimize the rate at which posture state
+            changes are reported. A change is only reported throught this API
+            when an implementation-defined threshold is crossed per [=posture
+            values table=]. Given the small number of states and a wide range
+            of angles that correlate with the default
+            "{{DevicePostureType/continuous}}" state, the rate of notifications
+            is limited. We playfully call this mitigation a physical
+            human-computer interface rate limiter.
           </p>
         </section>
       </section>
