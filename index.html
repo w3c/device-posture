@@ -156,12 +156,10 @@
     </section>
     <section>
       <h3>
-        Internal slots
+        Extensions to the `Document` interface
       </h3>
       <p>
         The following internal slots are added to the {{Document}} interface.
-        As it name implies, it will house the value of the current posture the
-        device is
       </p>
       <table class="simple">
         <thead>
@@ -180,43 +178,7 @@
               <dfn data-dfn-for="Document">[[\CurrentPosture]]</dfn>
             </td>
             <td>
-              The <dfn>current posture</dfn>.
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <p>
-        [=Top-level traversables=] must have the following internal slots:
-      </p>
-      <table class="simple">
-        <thead>
-          <tr>
-            <th>
-              Internal slot
-            </th>
-            <th>
-              Description
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <dfn data-dfn-for=
-              "top-level traversable">[[\PostureOverride]]</dfn>
-            </td>
-            <td>
-              Posture to override posture defined by hardware. Used in
-              automation. Possible values:
-              <ul>
-                <li>"{{DevicePostureType/continuous}}"
-                </li>
-                <li>"{{DevicePostureType/folded}}"
-                </li>
-                <li>
-                  <code>null</code>: Used when posture is defined by hardware.
-                </li>
-              </ul>
+              The device's <dfn>current posture</dfn>.
             </td>
           </tr>
         </tbody>
@@ -793,6 +755,46 @@
         commands=] that allows users to control the reported device posture and
         simulate a real device.
       </p>
+      <p>
+        To support the [=extension commands=] below and their integration with
+        [[[#algorithms]]], [=top-level traversables=] must have the following
+        internal slots:
+      </p>
+      <table class="simple">
+        <thead>
+          <tr>
+            <th>
+              Internal slot
+            </th>
+            <th>
+              Description
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <dfn data-dfn-for=
+              "top-level traversable">[[\PostureOverride]]</dfn>
+            </td>
+            <td>
+              Overrides the [=current posture=] provided by the hardware.
+              Possible values:
+              <ul>
+                <li>"{{DevicePostureType/continuous}}"
+                </li>
+                <li>"{{DevicePostureType/folded}}"
+                </li>
+                <li>
+                  <code>null</code>: Not overriding. The hardware-provided
+                  value will be used instead.
+                </li>
+              </ul>
+              These values are not exposed directly to script.
+            </td>
+          </tr>
+        </tbody>
+      </table>
       <h3>
         Extension Commands
       </h3>
