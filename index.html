@@ -507,13 +507,14 @@
           <li>Let |posture| be the result of invoking [=calculate the device
           posture information=] with |document|.
           </li>
-          <li>If |posture| is equal to
-          |document|.{{Document/[[CurrentPosture]]}}, abort these steps.
-          </li>
           <li>[=Queue a global task=] on the [=user interaction task source=]
           with |document|'s [=relevant global object=] to perform the following
           steps:
             <ol>
+              <li>If |document|'s [=Document/visibility state=] is "hidden" or
+              |posture| is equal to |document|.{{Document/[[CurrentPosture]]}},
+              abort these steps.
+              </li>
               <!-- We should use [=associated `Navigator`=], but the <dfn> is not exported by the
           HTML spec. -->
               <li>Set |document|.{{Document/[[CurrentPosture]]}} to |posture|.
